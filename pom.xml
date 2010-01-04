@@ -3,9 +3,9 @@
 
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
-    <artifactId>plugin</artifactId>
-    <version>1.337</version>
-    <relativePath>../pom.xml</relativePath>
+    <artifactId>analysis-parent-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../analysis-pom/parent-pom.xml</relativePath>
   </parent>
 
   <artifactId>analysis-collector</artifactId>
@@ -15,111 +15,42 @@
   <url>http://wiki.hudson-ci.org/display/HUDSON/Combined+Analysis+Plugin</url>
   <description>This plug-in collects the analysis results of the plug-ins
      Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings.</description>
-  <licenses>
-    <license>
-      <name>MIT license</name>
-      <comments>All source code is under the MIT license.</comments>
-    </license>
-    <license>
-      <name>BSD license</name>
-      <comments>All YUI source code is under the BSD license.</comments>
-    </license>
-  </licenses>
 
   <dependencies>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>checkstyle</artifactId>
-      <version>3.1-SNAPSHOT</version>
+      <version>3.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>dry</artifactId>
-      <version>2.1-SNAPSHOT</version>
+      <version>2.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>findbugs</artifactId>
-      <version>4.1-SNAPSHOT</version>
+      <version>4.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>pmd</artifactId>
-      <version>3.1-SNAPSHOT</version>
+      <version>3.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>tasks</artifactId>
-      <version>4.1-SNAPSHOT</version>
+      <version>4.1</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>warnings</artifactId>
-      <version>3.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.main</groupId>
-      <artifactId>maven-plugin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.java2html</groupId>
-      <artifactId>java2html</artifactId>
-      <version>5.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>findbugs</groupId>
-      <artifactId>annotations</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.3.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>1.7</version>
-        <scope>test</scope>
+      <version>3.1</version>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.kohsuke.stapler</groupId>
-        <artifactId>maven-stapler-plugin</artifactId>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>org.jvnet.hudson.tools</groupId>
-        <artifactId>maven-hpi-plugin</artifactId>
-        <configuration>
-          <showDeprecation>true</showDeprecation>
-          <showWarnings>true</showWarnings>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <repositories>
-    <repository>
-      <id>java.net2</id>
-      <url>http://download.java.net/maven/2/</url>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 
 </project>
