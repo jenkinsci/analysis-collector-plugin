@@ -10,7 +10,7 @@
 
   <artifactId>analysis-collector</artifactId>
   <packaging>hpi</packaging>
-  <name>Hudson Analysis Collector Plug-in</name>
+  <name>Static Analysis Collector Plug-in</name>
   <version>1.0-SNAPSHOT</version>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Static+Code+Analysis+Plug-ins</url>
   <description>This plug-in collects the analysis results of the plug-ins
