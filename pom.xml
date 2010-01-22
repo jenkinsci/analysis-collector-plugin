@@ -50,11 +50,13 @@
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>tasks</artifactId>
       <version>4.2-SNAPSHOT</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>warnings</artifactId>
       <version>3.2-SNAPSHOT</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
