@@ -14,11 +14,11 @@
   <name>Static Analysis Collector Plug-in</name>
   <version>1.0-SNAPSHOT</version>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Static+Code+Analysis+Plug-ins</url>
-  <description>This plug-in is an add-on for the plug-ins
-     Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
-     the plug-in collects the different analysis results and
-     shows the results in a combined trend graph. Additionally, provides health reporting
-     and build stability based on the combined results.</description>
+  <description>
+     This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
+     the plug-in collects the different analysis results and shows the results in a combined trend graph. 
+     Additionally, the plug-in provides health reporting and build stability based on these combined results.
+     </description>
   <dependencies>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
