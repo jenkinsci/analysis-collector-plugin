@@ -11,7 +11,7 @@
   <artifactId>analysis-collector</artifactId>
   <packaging>hpi</packaging>
   <name>Static Analysis Collector Plug-in</name>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.3-SNAPSHOT</version>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Analysis+Collector+Plugin</url>
   <description>
      This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
