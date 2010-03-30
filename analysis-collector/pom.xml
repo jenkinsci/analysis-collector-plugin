@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jvnet.hudson.plugins</groupId>
+    <artifactId>analysis-pom</artifactId>
+    <version>1.2</version>
+    <relativePath>../analysis-pom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>analysis-collector</artifactId>
+  <packaging>hpi</packaging>
+  <name>Static Analysis Collector Plug-in</name>
+  <version>1.3</version>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/Analysis+Collector+Plugin</url>
+  <description>
+     This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
+     the plug-in collects the different analysis results and shows the results in a combined trend graph.
+     Additionally, the plug-in provides health reporting and build stability based on these combined results.
+     </description>
+  <dependencies>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>analysis-core</artifactId>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>analysis-test</artifactId>
+      <version>1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>3.4</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>dry</artifactId>
+      <version>2.4</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>findbugs</artifactId>
+      <version>4.4</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>pmd</artifactId>
+      <version>3.4</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>tasks</artifactId>
+      <version>4.4</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.hudson.plugins</groupId>
+      <artifactId>warnings</artifactId>
+      <version>3.4</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <scm>
+    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/tags/analysis-collector-1.3</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/analysis-collector-1.3</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/tags/analysis-collector-1.3</url>
+  </scm>
+
+</project>
