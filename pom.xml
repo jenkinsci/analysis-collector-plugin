@@ -12,7 +12,7 @@
   <packaging>hpi</packaging>
   <name>Static Analysis Collector Plug-in</name>
   <version>1.11-SNAPSHOT</version>
-  <url>http://wiki.hudson-ci.org/display/HUDSON/Analysis+Collector+Plugin</url>
+  <url>http://wiki.jenkins-ci.org/x/tgeIAg</url>
   <description>
      This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
      the plug-in collects the different analysis results and shows the results in a combined trend graph.
