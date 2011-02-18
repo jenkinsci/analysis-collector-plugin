@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.16</version>
+    <version>1.18</version>
     <relativePath>../analysis-pom/pom.xml</relativePath>
   </parent>
 
@@ -13,16 +13,18 @@
   <name>Static Analysis Collector Plug-in</name>
   <version>1.11-SNAPSHOT</version>
   <url>http://wiki.jenkins-ci.org/x/tgeIAg</url>
+
   <description>
      This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
      the plug-in collects the different analysis results and shows the results in a combined trend graph.
      Additionally, the plug-in provides health reporting and build stability based on these combined results.
-     </description>
+  </description>
+
   <dependencies>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-    <version>1.16</version>
+    <version>1.17</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -68,9 +70,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:svn:https://guest@svn.java.net/svn/hudson~svn/trunk/hudson/plugins/analysis-collector</connection>
-    <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/plugins/analysis-collector</developerConnection>
-    <url>http://fisheye.hudson-ci.org/browse/Hudson/trunk/hudson/plugins/analysis-collector</url>
+    <connection>scm:git:git://github.com/jenkinsci/analysis-collector-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/analysis-collector-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/analysis-collector-plugin</url>
   </scm>
 
   <repositories>
