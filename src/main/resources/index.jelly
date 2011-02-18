@@ -1,5 +1,0 @@
-<div>
-     This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
-     the plug-in collects the different analysis results and shows the results in a combined trend graph.
-     Additionally, the plug-in provides health reporting and build stability based on these combined results.
-</div>
