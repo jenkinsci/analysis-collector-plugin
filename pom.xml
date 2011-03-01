@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.18</version>
+    <version>1.23</version>
     <relativePath>../analysis-pom/pom.xml</relativePath>
   </parent>
 
@@ -70,9 +70,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/analysis-collector-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/analysis-collector-plugin.git</developerConnection>
-    <url>https://github.com/jenkinsci/analysis-collector-plugin</url>
+    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
 
   <repositories>
