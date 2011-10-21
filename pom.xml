@@ -11,7 +11,7 @@
   <artifactId>analysis-collector</artifactId>
   <packaging>hpi</packaging>
   <name>Static Analysis Collector Plug-in</name>
-  <version>1.18</version>
+  <version>1.19-SNAPSHOT</version>
   <url>http://wiki.jenkins-ci.org/x/tgeIAg</url>
 
   <description>
