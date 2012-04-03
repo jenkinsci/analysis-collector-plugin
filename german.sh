@@ -1,2 +1,2 @@
-mvn stapler:i18n -Dlocale=de
+mvn compile stapler:i18n -Dlocale=de
 
