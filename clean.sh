@@ -1,7 +1,7 @@
-rm -rf $HUDSON_HOME/plugins/analysis-collector*
+rm -rf $JENKINS_HOME/plugins/analysis-collector*
 
 mvn clean install
-cp -f target/*.hpi $HUDSON_HOME/plugins/
+cp -f target/*.hpi $JENKINS_HOME/plugins/
 
-cd $HUDSON_HOME
-java -jar jenkins.war
+cd $JENKINS_HOME
+./go.sh

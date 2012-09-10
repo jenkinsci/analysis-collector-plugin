@@ -1,5 +1,5 @@
-rm -rf $HUDSON_HOME/plugins/analysis-collector*
+rm -rf $JENKINS_HOME/plugins/analysis-collector*
 
 mvn install
-cp -f target/*.hpi $HUDSON_HOME/plugins/
+cp -f target/*.hpi $JENKINS_HOME/plugins/
 
