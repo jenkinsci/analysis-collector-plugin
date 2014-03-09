@@ -1,13 +1,13 @@
 package hudson.plugins.analysis.collector;
 
-import hudson.Extension;
-import hudson.model.AbstractProject;
-import hudson.plugins.analysis.core.PluginDescriptor;
-
 import java.util.Collection;
 import java.util.HashSet;
 
 import com.google.common.collect.Sets;
+
+import hudson.Extension;
+import hudson.model.AbstractProject;
+import hudson.plugins.analysis.core.PluginDescriptor;
 
 /**
  * Descriptor for the class {@link AnalysisPublisher}. Used as a singleton. The
@@ -25,6 +25,13 @@ public final class AnalysisDescriptor extends PluginDescriptor {
     /** Icon to use for the result and project action. */
     static final String ICON_URL = ICONS_PREFIX + "analysis-24x24.png";
 
+    public static final String CHECKSTYLE = "checkstyle";
+    public static final String DRY = "dry";
+    public static final String FINDBUGS = "findbugs";
+    public static final String PMD = "pmd";
+    public static final String TASKS = "tasks";
+    public static final String WARNINGS = "warnings";
+
     /**
      * Returns the activated plug-ins.
      *
@@ -34,22 +41,22 @@ public final class AnalysisDescriptor extends PluginDescriptor {
         HashSet<String> plugins = Sets.newHashSet();
 
         if (isCheckStyleInstalled()) {
-            plugins.add("checkstyle");
+            plugins.add(CHECKSTYLE);
         }
         if (isDryInstalled()) {
-            plugins.add("dry");
+            plugins.add(DRY);
         }
         if (isFindBugsInstalled()) {
-            plugins.add("findbugs");
+            plugins.add(FINDBUGS);
         }
         if (isPmdInstalled()) {
-            plugins.add("pmd");
+            plugins.add(PMD);
         }
         if (isOpenTasksInstalled()) {
-            plugins.add("tasks");
+            plugins.add(TASKS);
         }
         if (isWarningsInstalled()) {
-            plugins.add("warnings");
+            plugins.add(WARNINGS);
         }
         return plugins;
     }
@@ -61,7 +68,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isCheckStyleInstalled() {
-        return isPluginInstalled("checkstyle");
+        return isPluginInstalled(CHECKSTYLE);
     }
 
     /**
@@ -71,7 +78,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isDryInstalled() {
-        return isPluginInstalled("dry");
+        return isPluginInstalled(DRY);
     }
 
     /**
@@ -81,7 +88,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isFindBugsInstalled() {
-        return isPluginInstalled("findbugs");
+        return isPluginInstalled(FINDBUGS);
     }
 
     /**
@@ -91,7 +98,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isPmdInstalled() {
-        return isPluginInstalled("pmd");
+        return isPluginInstalled(PMD);
     }
 
     /**
@@ -101,7 +108,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isOpenTasksInstalled() {
-        return isPluginInstalled("tasks");
+        return isPluginInstalled(TASKS);
     }
 
     /**
@@ -111,7 +118,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      *         <code>false</code> if not.
      */
     public static boolean isWarningsInstalled() {
-        return isPluginInstalled("warnings");
+        return isPluginInstalled(WARNINGS);
     }
 
     /**

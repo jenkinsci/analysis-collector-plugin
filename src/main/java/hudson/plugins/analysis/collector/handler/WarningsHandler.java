@@ -6,6 +6,7 @@ import org.jvnet.localizer.Localizable;
 
 import com.google.common.collect.Lists;
 
+import hudson.plugins.analysis.collector.AnalysisDescriptor;
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.core.BuildResult;
 import hudson.plugins.analysis.core.PluginDescriptor;
@@ -26,7 +27,7 @@ public class WarningsHandler implements AnalysisHandler {
     }
 
     public String getUrl() {
-        return "warnings";
+        return AnalysisDescriptor.WARNINGS;
     }
 
     public Localizable getDetailHeader() {
