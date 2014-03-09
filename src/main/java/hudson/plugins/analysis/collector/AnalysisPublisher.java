@@ -1,36 +1,26 @@
 package hudson.plugins.analysis.collector; // NOPMD
 
-import hudson.Launcher;
-import hudson.matrix.MatrixAggregator;
-import hudson.matrix.MatrixBuild;
-import hudson.model.Action;
-import hudson.model.BuildListener;
-import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
-import hudson.plugins.analysis.core.HealthAwarePublisher;
-import hudson.plugins.analysis.core.ParserResult;
-import hudson.plugins.analysis.core.ResultAction;
-import hudson.plugins.analysis.core.BuildResult;
-import hudson.plugins.analysis.util.PluginLogger;
-import hudson.plugins.analysis.util.model.FileAnnotation;
-import hudson.plugins.checkstyle.CheckStyleMavenResultAction;
-import hudson.plugins.checkstyle.CheckStyleResultAction;
-import hudson.plugins.dry.DryMavenResultAction;
-import hudson.plugins.dry.DryResultAction;
-import hudson.plugins.findbugs.FindBugsMavenResultAction;
-import hudson.plugins.findbugs.FindBugsResultAction;
-import hudson.plugins.pmd.PmdMavenResultAction;
-import hudson.plugins.pmd.PmdResultAction;
-import hudson.plugins.tasks.TasksMavenResultAction;
-import hudson.plugins.tasks.TasksResultAction;
-import hudson.plugins.warnings.WarningsResultAction;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.kohsuke.stapler.DataBoundConstructor;
+
+import hudson.Launcher;
+import hudson.matrix.MatrixAggregator;
+import hudson.matrix.MatrixBuild;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.model.Action;
+import hudson.model.BuildListener;
+import hudson.plugins.analysis.collector.handler.*;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.HealthAwarePublisher;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.ResultAction;
+import hudson.plugins.analysis.util.PluginLogger;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 
 /**
  * Collects the results of the various analysis plug-ins.
@@ -212,27 +202,22 @@ public class AnalysisPublisher extends HealthAwarePublisher {
         pluginResults = new ArrayList<Class<? extends ResultAction<? extends BuildResult>>>();
 
         if (AnalysisDescriptor.isCheckStyleInstalled() && isCheckStyleActivated()) {
-            pluginResults.add(CheckStyleResultAction.class);
-            pluginResults.add(CheckStyleMavenResultAction.class);
+            pluginResults.addAll(new CheckStyleHandler().getResultActions());
         }
         if (AnalysisDescriptor.isDryInstalled() && isDryActivated()) {
-            pluginResults.add(DryResultAction.class);
-            pluginResults.add(DryMavenResultAction.class);
+            pluginResults.addAll(new DryHandler().getResultActions());
         }
         if (AnalysisDescriptor.isFindBugsInstalled() && isFindBugsActivated()) {
-            pluginResults.add(FindBugsResultAction.class);
-            pluginResults.add(FindBugsMavenResultAction.class);
+            pluginResults.addAll(new FindBugsHandler().getResultActions());
         }
         if (AnalysisDescriptor.isPmdInstalled() && isPmdActivated()) {
-            pluginResults.add(PmdResultAction.class);
-            pluginResults.add(PmdMavenResultAction.class);
+            pluginResults.addAll(new PmdHandler().getResultActions());
         }
         if (AnalysisDescriptor.isOpenTasksInstalled() && isOpenTasksActivated()) {
-            pluginResults.add(TasksResultAction.class);
-            pluginResults.add(TasksMavenResultAction.class);
+            pluginResults.addAll(new TasksHandler().getResultActions());
         }
         if (AnalysisDescriptor.isWarningsInstalled() && isWarningsActivated()) {
-            pluginResults.add(WarningsResultAction.class);
+            pluginResults.addAll(new WarningsHandler().getResultActions());
         }
 
         return pluginResults;

@@ -5,15 +5,9 @@ import org.apache.commons.lang.StringUtils;
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
 import hudson.model.Job;
-
+import hudson.plugins.analysis.collector.handler.*;
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.core.BuildResult;
-import hudson.plugins.checkstyle.CheckStyleProjectAction;
-import hudson.plugins.dry.DryProjectAction;
-import hudson.plugins.findbugs.FindBugsProjectAction;
-import hudson.plugins.pmd.PmdProjectAction;
-import hudson.plugins.tasks.TasksProjectAction;
-import hudson.plugins.warnings.AggregatedWarningsProjectAction;
 
 /**
  * Aggregates the warnings of the analysis plug-in from a single job.
@@ -138,7 +132,7 @@ public class WarningsAggregator {
      */
     public String getCheckStyle(final Job<?, ?> job) {
         if (isCheckStyleActivated()) {
-            return getWarnings(job, CheckStyleProjectAction.class, "checkstyle");
+            return getWarnings(job, new CheckStyleHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -152,7 +146,7 @@ public class WarningsAggregator {
      */
     public String getDry(final Job<?, ?> job) {
         if (isDryActivated()) {
-            return getWarnings(job, DryProjectAction.class, "dry");
+            return getWarnings(job, new DryHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -166,7 +160,7 @@ public class WarningsAggregator {
      */
     public String getFindBugs(final Job<?, ?> job) {
         if (isFindBugsActivated()) {
-            return getWarnings(job, FindBugsProjectAction.class, "findbugs");
+            return getWarnings(job, new FindBugsHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -180,7 +174,7 @@ public class WarningsAggregator {
      */
     public String getPmd(final Job<?, ?> job) {
         if (isPmdActivated()) {
-            return getWarnings(job, PmdProjectAction.class, "pmd");
+            return getWarnings(job, new PmdHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -194,7 +188,7 @@ public class WarningsAggregator {
      */
     public String getTasks(final Job<?, ?> job) {
         if (isOpenTasksActivated()) {
-            return getWarnings(job, TasksProjectAction.class, "tasks");
+            return getWarnings(job, new TasksHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -208,7 +202,7 @@ public class WarningsAggregator {
      */
     public String getCompilerWarnings(final Job<?, ?> job) {
         if (isWarningsActivated()) {
-            return getWarnings(job, AggregatedWarningsProjectAction.class, "warnings");
+            return getWarnings(job, new WarningsHandler());
         }
         return NO_RESULTS_FOUND;
     }
@@ -232,24 +226,22 @@ public class WarningsAggregator {
     /**
      * Returns the warnings for the specified action.
      *
+     *
      * @param job
      *            the job to get the action from
-     * @param actionType
-     *            the type of the action
-     * @param plugin
-     *            the plug-in that is target of the link
+     * @param handler
+     *            the analysis plug-in handler
      * @return the number of warnings
      */
     @SuppressWarnings("NP")
-    private String getWarnings(final Job<?, ?> job, final Class<? extends AbstractProjectAction<?>> actionType,
-            final String plugin) {
-        AbstractProjectAction<?> action = job.getAction(actionType);
+    private String getWarnings(final Job<?, ?> job, final AnalysisHandler handler) {
+        AbstractProjectAction<?> action = job.getAction(handler.getProjectActionType());
         if (action != null && action.hasValidResults()) {
             BuildResult result = action.getLastAction().getResult();
             int numberOfAnnotations = result.getNumberOfAnnotations();
             String value;
             if (numberOfAnnotations > 0) {
-                value = String.format("<a href=\"%s%s\">%d</a>", getJobPrefix(job), plugin, numberOfAnnotations);
+                value = String.format("<a href=\"%s%s\">%d</a>", getJobPrefix(job), handler.getUrl(), numberOfAnnotations);
             }
             else {
                 value = String.valueOf(numberOfAnnotations);
@@ -275,7 +267,7 @@ public class WarningsAggregator {
      */
     public boolean hasCheckStyle(final Job<?, ?> job) {
         if (isCheckStyleActivated()) {
-            return hasAction(job, CheckStyleProjectAction.class);
+            return hasAction(job, new CheckStyleHandler());
         }
         return false;
     }
@@ -289,7 +281,7 @@ public class WarningsAggregator {
      */
     public boolean hasDry(final Job<?, ?> job) {
         if (isDryActivated()) {
-            return hasAction(job, DryProjectAction.class);
+            return hasAction(job, new DryHandler());
         }
         return false;
     }
@@ -303,7 +295,7 @@ public class WarningsAggregator {
      */
     public boolean hasFindBugs(final Job<?, ?> job) {
         if (isFindBugsActivated()) {
-            return hasAction(job, FindBugsProjectAction.class);
+            return hasAction(job, new FindBugsHandler());
         }
         return false;
     }
@@ -317,7 +309,7 @@ public class WarningsAggregator {
      */
     public boolean hasPmd(final Job<?, ?> job) {
         if (isPmdActivated()) {
-            return hasAction(job, PmdProjectAction.class);
+            return hasAction(job, new PmdHandler());
         }
         return false;
     }
@@ -331,7 +323,7 @@ public class WarningsAggregator {
      */
     public boolean hasTasks(final Job<?, ?> job) {
         if (isOpenTasksActivated()) {
-            return hasAction(job, TasksProjectAction.class);
+            return hasAction(job, new TasksHandler());
         }
         return false;
     }
@@ -345,13 +337,13 @@ public class WarningsAggregator {
      */
     public boolean hasCompilerWarnings(final Job<?, ?> job) {
         if (isWarningsActivated()) {
-            return hasAction(job, AggregatedWarningsProjectAction.class);
+            return hasAction(job, new WarningsHandler());
         }
         return false;
     }
 
-    private boolean hasAction(final Job<?, ?> job, final Class<? extends AbstractProjectAction<?>> actionType) {
-        AbstractProjectAction<?> action = job.getAction(actionType);
+    private boolean hasAction(final Job<?, ?> job, final AnalysisHandler handler) {
+        AbstractProjectAction<?> action = job.getAction(handler.getProjectActionType());
 
         return action != null && action.hasValidResults();
     }

@@ -1,25 +1,17 @@
 package hudson.plugins.analysis.collector;
 
-import jenkins.model.Jenkins;
-
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.DataBoundConstructor;
 
+import jenkins.model.Jenkins;
+
 import hudson.Extension;
-
 import hudson.model.Job;
-
+import hudson.plugins.analysis.collector.handler.*;
 import hudson.plugins.analysis.core.PluginDescriptor;
 import hudson.plugins.analysis.util.HtmlPrinter;
-import hudson.plugins.checkstyle.CheckStyleDescriptor;
-import hudson.plugins.dry.DryDescriptor;
-import hudson.plugins.findbugs.FindBugsDescriptor;
-import hudson.plugins.pmd.PmdDescriptor;
-import hudson.plugins.tasks.TasksDescriptor;
-import hudson.plugins.warnings.WarningsDescriptor;
-
-import hudson.views.ListViewColumnDescriptor;
 import hudson.views.ListViewColumn;
+import hudson.views.ListViewColumnDescriptor;
 
 /**
  * A column that shows the total number of warnings in a job.
@@ -131,31 +123,29 @@ public class WarningsCountColumn extends ListViewColumn {
         HtmlPrinter printer = new HtmlPrinter();
         printer.append("<table>");
         if (isCheckStyleActivated()) {
-            printLine(printer, hudson.plugins.checkstyle.Messages._Checkstyle_Detail_header(),
-                    warningsAggregator.getCheckStyle(job), CheckStyleDescriptor.class);
+            printLine(printer, new CheckStyleHandler(), warningsAggregator.getCheckStyle(job));
         }
         if (isDryActivated()) {
-            printLine(printer, hudson.plugins.dry.Messages._DRY_Detail_header(),
-                    warningsAggregator.getDry(job), DryDescriptor.class);
+            printLine(printer, new DryHandler(), warningsAggregator.getDry(job));
         }
         if (isFindBugsActivated()) {
-            printLine(printer, hudson.plugins.findbugs.Messages._FindBugs_Detail_header(),
-                    warningsAggregator.getFindBugs(job), FindBugsDescriptor.class);
+            printLine(printer, new FindBugsHandler(), warningsAggregator.getFindBugs(job));
         }
         if (isPmdActivated()) {
-            printLine(printer, hudson.plugins.pmd.Messages._PMD_Detail_header(),
-                    warningsAggregator.getPmd(job), PmdDescriptor.class);
+            printLine(printer, new PmdHandler(), warningsAggregator.getPmd(job));
         }
         if (isOpenTasksActivated()) {
-            printLine(printer, hudson.plugins.tasks.Messages._Tasks_ProjectAction_Name(),
-                    warningsAggregator.getTasks(job), TasksDescriptor.class);
+            printLine(printer, new TasksHandler(), warningsAggregator.getTasks(job));
         }
         if (isWarningsActivated()) {
-            printLine(printer, hudson.plugins.warnings.Messages._Warnings_ProjectAction_Name(),
-                    warningsAggregator.getCompilerWarnings(job), WarningsDescriptor.class);
+            printLine(printer, new WarningsHandler(), warningsAggregator.getCompilerWarnings(job));
         }
         printer.append("</table>");
         return printer.toString();
+    }
+
+    private void printLine(final HtmlPrinter printer, final AnalysisHandler handler, final String warnings) {
+        printLine(printer, handler.getDetailHeader(), warnings, handler.getDescriptor());
     }
 
     private void printLine(final HtmlPrinter printer, final Localizable header, final String warnings,
