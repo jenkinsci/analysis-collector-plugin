@@ -5,7 +5,6 @@ import java.util.List;
 import org.kohsuke.stapler.StaplerRequest;
 
 import hudson.model.AbstractProject;
-
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.graph.BuildResultGraph;
 import hudson.plugins.analysis.graph.GraphConfigurationView;
@@ -45,7 +44,13 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
     }
 
     private void createAggregator() {
-        warningsAggregator = new WarningsAggregator(true, true, true, true, true, true);
+        warningsAggregator = new WarningsAggregator(
+                AnalysisDescriptor.isCheckStyleInstalled(),
+                AnalysisDescriptor.isDryInstalled(),
+                AnalysisDescriptor.isFindBugsInstalled(),
+                AnalysisDescriptor.isPmdInstalled(),
+                AnalysisDescriptor.isOpenTasksInstalled(),
+                AnalysisDescriptor.isWarningsInstalled());
         warningsAggregator.hideJobPrefix();
     }
 
