@@ -22,22 +22,27 @@ import hudson.plugins.warnings.WarningsResultAction;
  * @author Ulli Hafner
  */
 public class WarningsHandler implements AnalysisHandler {
+    @Override
     public Class<? extends AbstractProjectAction<?>> getProjectActionType() {
         return AggregatedWarningsProjectAction.class;
     }
 
+    @Override
     public String getUrl() {
         return AnalysisDescriptor.WARNINGS;
     }
 
+    @Override
     public Localizable getDetailHeader() {
         return Messages._Warnings_ProjectAction_Name();
     }
 
+    @Override
     public Class<? extends PluginDescriptor> getDescriptor() {
         return WarningsDescriptor.class;
     }
 
+    @Override
     public Collection<? extends Class<? extends ResultAction<? extends BuildResult>>> getResultActions() {
         return Lists.newArrayList(WarningsResultAction.class);
     }

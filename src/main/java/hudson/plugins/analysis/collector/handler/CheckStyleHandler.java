@@ -19,22 +19,27 @@ import hudson.plugins.checkstyle.*;
  * @author Ulli Hafner
  */
 public class CheckStyleHandler implements AnalysisHandler {
+    @Override
     public Class<? extends AbstractProjectAction<?>> getProjectActionType() {
         return CheckStyleProjectAction.class;
     }
 
+    @Override
     public String getUrl() {
         return AnalysisDescriptor.CHECKSTYLE;
     }
 
+    @Override
     public Localizable getDetailHeader() {
         return Messages._Checkstyle_Detail_header();
     }
 
+    @Override
     public Class<? extends PluginDescriptor> getDescriptor() {
         return CheckStyleDescriptor.class;
     }
 
+    @Override
     public Collection<? extends Class<? extends ResultAction<? extends BuildResult>>> getResultActions() {
         return Lists.newArrayList(CheckStyleResultAction.class, CheckStyleMavenResultAction.class);
     }

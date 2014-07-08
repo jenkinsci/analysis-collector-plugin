@@ -1,16 +1,16 @@
 package hudson.plugins.analysis.collector; // NOPMD
 
-import hudson.model.AbstractBuild;
-import hudson.plugins.analysis.core.BuildHistory;
-import hudson.plugins.analysis.core.ParserResult;
-import hudson.plugins.analysis.core.ResultAction;
-import hudson.plugins.analysis.core.BuildResult;
-import hudson.plugins.analysis.util.model.FileAnnotation;
-
 import java.io.IOException;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+
+import hudson.model.AbstractBuild;
+import hudson.plugins.analysis.core.BuildHistory;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.ResultAction;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 
 /**
  * Stores the results of the analysis plug-ins. One instance of this class is
@@ -102,7 +102,7 @@ public class AnalysisResult extends BuildResult {
         return "analysis.xml";
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getDisplayName() {
         return Messages.Analysis_ProjectAction_Name();
     }

@@ -180,7 +180,6 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
         return warningsAggregator.isWarningsActivated();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean isVisibleJob(final Job<?, ?> job) {
         return toInt(getTotal(job)) > 0;

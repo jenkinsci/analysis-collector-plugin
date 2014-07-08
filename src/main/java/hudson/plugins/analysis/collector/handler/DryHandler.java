@@ -19,22 +19,27 @@ import hudson.plugins.dry.*;
  * @author Ulli Hafner
  */
 public class DryHandler implements AnalysisHandler {
+    @Override
     public Class<? extends AbstractProjectAction<?>> getProjectActionType() {
         return DryProjectAction.class;
     }
 
+    @Override
     public String getUrl() {
         return AnalysisDescriptor.DRY;
     }
 
+    @Override
     public Localizable getDetailHeader() {
         return Messages._DRY_Detail_header();
     }
 
+    @Override
     public Class<? extends PluginDescriptor> getDescriptor() {
         return DryDescriptor.class;
     }
 
+    @Override
     public Collection<? extends Class<? extends ResultAction<? extends BuildResult>>> getResultActions() {
         return Lists.newArrayList(DryResultAction.class, DryMavenResultAction.class);
     }

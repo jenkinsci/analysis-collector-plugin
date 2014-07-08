@@ -31,7 +31,7 @@ public class AnalysisResultAction extends AbstractResultAction<AnalysisResult> {
         super(owner, new AnalysisHealthDescriptor(healthDescriptor), result);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getDisplayName() {
         return Messages.Analysis_ProjectAction_Name();
     }

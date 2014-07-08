@@ -19,22 +19,27 @@ import hudson.plugins.findbugs.*;
  * @author Ulli Hafner
  */
 public class FindBugsHandler implements AnalysisHandler {
+    @Override
     public Class<? extends AbstractProjectAction<?>> getProjectActionType() {
         return FindBugsProjectAction.class;
     }
 
+    @Override
     public String getUrl() {
         return AnalysisDescriptor.FINDBUGS;
     }
 
+    @Override
     public Localizable getDetailHeader() {
         return Messages._FindBugs_Detail_header();
     }
 
+    @Override
     public Class<? extends PluginDescriptor> getDescriptor() {
         return FindBugsDescriptor.class;
     }
 
+    @Override
     public Collection<? extends Class<? extends ResultAction<? extends BuildResult>>> getResultActions() {
         return Lists.newArrayList(FindBugsResultAction.class, FindBugsMavenResultAction.class);
     }

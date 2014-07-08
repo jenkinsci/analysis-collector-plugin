@@ -161,8 +161,7 @@ public class WarningsCountColumn extends ListViewColumn {
      */
     @Extension
     public static class ColumnDescriptor extends ListViewColumnDescriptor {
-        /** {@inheritDoc} */
-        @Override
+            @Override
         public boolean shownByDefault() {
             return false;
         }

@@ -251,7 +251,7 @@ public class AnalysisPublisher extends HealthAwarePublisher {
         return (AnalysisDescriptor)super.getDescriptor();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public MatrixAggregator createAggregator(final MatrixBuild build, final Launcher launcher,
             final BuildListener listener) {
         return new AnalysisAnnotationsAggregator(build, launcher, listener, this, getDefaultEncoding(), useOnlyStableBuildsAsReference());

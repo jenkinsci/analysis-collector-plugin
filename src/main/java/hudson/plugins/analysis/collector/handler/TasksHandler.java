@@ -19,22 +19,27 @@ import hudson.plugins.tasks.*;
  * @author Ulli Hafner
  */
 public class TasksHandler implements AnalysisHandler {
+    @Override
     public Class<? extends AbstractProjectAction<?>> getProjectActionType() {
         return TasksProjectAction.class;
     }
 
+    @Override
     public String getUrl() {
         return AnalysisDescriptor.TASKS;
     }
 
+    @Override
     public Localizable getDetailHeader() {
         return Messages._Tasks_ProjectAction_Name();
     }
 
+    @Override
     public Class<? extends PluginDescriptor> getDescriptor() {
         return TasksDescriptor.class;
     }
 
+    @Override
     public Collection<? extends Class<? extends ResultAction<? extends BuildResult>>> getResultActions() {
         return Lists.newArrayList(TasksResultAction.class, TasksMavenResultAction.class);
     }
