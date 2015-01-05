@@ -102,6 +102,9 @@ public class AnalysisPublisher extends HealthAwarePublisher {
      *            determines whether to collect compiler warnings
      * @param canRunOnFailed
      *            determines whether the plug-in can run for failed builds, too
+     * @param usePreviousBuildAsReference
+     *            determines whether the previous build should be used as the
+     *            reference build
      * @param useStableBuildAsReference
      *            determines whether only stable builds should be used as reference builds or not
      * @param canComputeNew
@@ -117,16 +120,16 @@ public class AnalysisPublisher extends HealthAwarePublisher {
             final String unstableNewAll, final String unstableNewHigh, final String unstableNewNormal, final String unstableNewLow,
             final String failedTotalAll, final String failedTotalHigh, final String failedTotalNormal, final String failedTotalLow,
             final String failedNewAll, final String failedNewHigh, final String failedNewNormal, final String failedNewLow,
-            final boolean isCheckStyleActivated, final boolean isDryActivated,
-            final boolean isFindBugsActivated, final boolean isPmdActivated,
-            final boolean isOpenTasksActivated, final boolean isWarningsActivated,
-            final boolean canRunOnFailed, final boolean useStableBuildAsReference, final boolean canComputeNew) {
+            final boolean isCheckStyleActivated, final boolean isDryActivated, final boolean isFindBugsActivated,
+            final boolean isPmdActivated, final boolean isOpenTasksActivated, final boolean isWarningsActivated,
+            final boolean canRunOnFailed,
+            final boolean usePreviousBuildAsReference, final boolean useStableBuildAsReference, final boolean canComputeNew) {
         super(healthy, unHealthy, thresholdLimit, defaultEncoding, useDeltaValues,
                 unstableTotalAll, unstableTotalHigh, unstableTotalNormal, unstableTotalLow,
                 unstableNewAll, unstableNewHigh, unstableNewNormal, unstableNewLow,
                 failedTotalAll, failedTotalHigh, failedTotalNormal, failedTotalLow,
                 failedNewAll, failedNewHigh, failedNewNormal, failedNewLow,
-                canRunOnFailed, useStableBuildAsReference, false, canComputeNew, false, "ANALYSIS-COLLECTOR");
+                canRunOnFailed, usePreviousBuildAsReference, useStableBuildAsReference, false, canComputeNew, false, "ANALYSIS-COLLECTOR");
         isDryDeactivated = !isDryActivated;
         isFindBugsDeactivated = !isFindBugsActivated;
         isPmdDeactivated = !isPmdActivated;
@@ -240,8 +243,9 @@ public class AnalysisPublisher extends HealthAwarePublisher {
             }
         }
 
-        AnalysisResult result = new AnalysisResult(build, getDefaultEncoding(), overallResult, useOnlyStableBuildsAsReference());
-        build.getActions().add(new AnalysisResultAction(build, this, result));
+        AnalysisResult result = new AnalysisResult(build, getDefaultEncoding(), overallResult,
+                usePreviousBuildAsReference(), useOnlyStableBuildsAsReference());
+        build.addAction(new AnalysisResultAction(build, this, result));
 
         return result;
     }
@@ -254,6 +258,7 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     @Override
     public MatrixAggregator createAggregator(final MatrixBuild build, final Launcher launcher,
             final BuildListener listener) {
-        return new AnalysisAnnotationsAggregator(build, launcher, listener, this, getDefaultEncoding(), useOnlyStableBuildsAsReference());
+        return new AnalysisAnnotationsAggregator(build, launcher, listener, this, getDefaultEncoding(),
+                usePreviousBuildAsReference(), useOnlyStableBuildsAsReference());
     }
 }
