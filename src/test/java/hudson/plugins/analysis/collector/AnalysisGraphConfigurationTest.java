@@ -63,14 +63,15 @@ public class AnalysisGraphConfigurationTest {
     public void testValidConfiguations() {
         AnalysisGraphConfiguration configuration = createConfigurationUnderTest();
 
-        assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom("50!50!12!13!ORIGIN!1!0"));
+        // See GraphConfiguration.initializeFrom
+        assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom("50!50!12!13!ORIGIN!1!!!0"));
         assertFalse(WRONG_VALUE_OF_DEACTIVATE_PROPERTY, configuration.canDeacticateOtherTrendGraphs());
 
         AnalysisGraphConfiguration other = createConfigurationUnderTest();
         assertTrue(VALID_CONFIGURATION_REJECTED, other.initializeFrom(configuration.serializeToString()));
         assertEquals("Wrong serialization", configuration, other);
 
-        assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom("50!50!12!13!ORIGIN!1!1"));
+        assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom("50!50!12!13!ORIGIN!1!!!1"));
         assertTrue(WRONG_VALUE_OF_DEACTIVATE_PROPERTY, configuration.canDeacticateOtherTrendGraphs());
     }
 

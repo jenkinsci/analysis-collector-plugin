@@ -30,12 +30,12 @@ public class AnalysisGraphConfiguration extends GraphConfiguration {
 
     @Override
     protected boolean initializeLocal(final String[] localConfiguration) {
-        if (localConfiguration.length == 1) {
-            if ("0".equals(localConfiguration[0])) {
+        if (localConfiguration.length >= 1) {
+            if ("0".equals(localConfiguration[localConfiguration.length - 1])) {
                 canDeactivateGraphs = false;
                 return true;
             }
-            else if ("1".equals(localConfiguration[0])) {
+            else if ("1".equals(localConfiguration[localConfiguration.length - 1])) {
                 canDeactivateGraphs = true;
                 return true;
             }
@@ -77,7 +77,7 @@ public class AnalysisGraphConfiguration extends GraphConfiguration {
 
     @Override
     public String serializeToString() {
-        return super.serializeToString() + SEPARATOR + serializeBoolean(canDeactivateGraphs);
+        return super.serializeToString() + serializeBoolean(canDeactivateGraphs);
     }
 
     // CHECKSTYLE:OFF
