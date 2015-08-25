@@ -27,7 +27,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.73-beta-SNAPSHOT</version>
+      <version>1.73-beta-SNAPSHOT</version><!-- TODO: change to 1.73 before release -->
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -57,6 +57,12 @@
       <artifactId>pmd</artifactId>
       <version>3.37</version>
       <optional>true</optional>
+      <exclusions>
+        <exclusion>
+            <groupId>ant</groupId><!-- Tests are failing due to an old version this -->
+            <artifactId>ant</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
