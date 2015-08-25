@@ -1,6 +1,5 @@
 package hudson.plugins.analysis.collector;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Run;
 
 import hudson.plugins.analysis.core.AbstractResultAction;
@@ -41,21 +40,5 @@ public class AnalysisResultAction extends AbstractResultAction<AnalysisResult> {
     @Override
     protected PluginDescriptor getDescriptor() {
         return new AnalysisDescriptor();
-    }
-
-    /**
-     * Creates a new instance of {@link AbstractResultAction}.
-     *
-     * @param owner
-     *            the associated build of this action
-     * @param healthDescriptor
-     *            health descriptor to use
-     * @param result
-     *            the result of this build
-     * @deprecated use {@link #AnalysisResultAction(Run, HealthDescriptor, AnalysisResult)} instead
-     */
-    @Deprecated
-    public AnalysisResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final AnalysisResult result) {
-        this((Run<?, ?>) owner, healthDescriptor, result);
     }
 }

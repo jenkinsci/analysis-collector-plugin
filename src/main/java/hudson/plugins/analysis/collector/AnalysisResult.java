@@ -143,36 +143,4 @@ public class AnalysisResult extends BuildResult {
         }
         return 0;
     }
-
-    /**
-     * @deprecated use {@link #AnalysisResult(Run, BuildHistory, ParserResult, String, boolean)} instead
-     */
-    @Deprecated
-    AnalysisResult(final AbstractBuild<?, ?> build, final BuildHistory history,
-            final ParserResult result, final String defaultEncoding, final boolean canSerialize) {
-        this((Run<?,?>) build, history, result, defaultEncoding, canSerialize);
-    }
-
-    /**
-     * Creates a new instance of {@link AnalysisResult}.
-     *
-     * @param build
-     *            the current build as owner of this action
-     * @param defaultEncoding
-     *            the default encoding to be used when reading and parsing files
-     * @param result
-     *            the parsed result with all annotations
-     * @param usePreviousBuildAsReference
-     *            determines whether the previous build should be used as the
-     *            reference build
-     * @param useStableBuildAsReference
-     *            determines whether only stable builds should be used as
-     *            reference builds or not
-     * @deprecated use {@link #AnalysisResult(Run, String, ParserResult, boolean, boolean)} instead
-     */
-    @Deprecated
-    public AnalysisResult(final AbstractBuild<?, ?> build, final String defaultEncoding, final ParserResult result,
-            final boolean usePreviousBuildAsReference, final boolean useStableBuildAsReference) {
-        this((Run<?, ?>) build, defaultEncoding, result, usePreviousBuildAsReference, useStableBuildAsReference);
-    }
 }
