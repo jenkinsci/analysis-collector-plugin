@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.59</version>
+    <version>1.63</version>
   </parent>
 
   <artifactId>analysis-collector</artifactId>
@@ -19,11 +19,15 @@
     Additionally, the plug-in provides health reporting and build stability based on these combined results.
   </description>
 
+  <properties>
+    <workflow.version>1.4</workflow.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.73-SNAPSHOT</version>
+      <version>1.73-beta-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -65,6 +69,24 @@
       <artifactId>warnings</artifactId>
       <version>4.35</version>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-job</artifactId>
+      <version>${workflow.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-cps</artifactId>
+      <version>${workflow.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-basic-steps</artifactId>
+      <version>${workflow.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
