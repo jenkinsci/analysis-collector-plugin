@@ -20,7 +20,7 @@
   </description>
 
   <properties>
-    <workflow.version>1.4</workflow.version>
+    <workflow.version>1.7</workflow.version>
   </properties>
 
   <dependencies>
