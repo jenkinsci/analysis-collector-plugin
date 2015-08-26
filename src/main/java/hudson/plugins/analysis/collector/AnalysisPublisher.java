@@ -68,18 +68,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isCheckStyleActivated()
      */
-    public boolean isIsCheckStyleActivated() {
-        return isCheckStyleActivated();
-    }
-
     @DataBoundSetter
-    public void setIsCheckStyleActivated(final boolean isCheckStyleActivated) {
-        isCheckStyleDeactivated = !isCheckStyleActivated;
+    public void setCheckStyleActivated(final boolean checkStyleActivated) {
+        isCheckStyleDeactivated = !checkStyleActivated;
     }
 
     /**
@@ -92,18 +85,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isDryActivated()
      */
-    public boolean isIsDryActivated() {
-        return isDryActivated();
-    }
-
     @DataBoundSetter
-    public void setIsDryActivated(final boolean isDryActivated) {
-        isDryDeactivated = !isDryActivated;
+    public void setDryActivated(final boolean dryActivated) {
+        isDryDeactivated = !dryActivated;
     }
 
     /**
@@ -116,18 +102,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isFindBugsActivated()
      */
-    public boolean isIsFindBugsActivated() {
-        return isFindBugsActivated();
-    }
-
     @DataBoundSetter
-    public void setIsFindBugsActivated(final boolean isFindBugsActivated) {
-        isFindBugsDeactivated = !isFindBugsActivated;
+    public void setFindBugsActivated(final boolean findBugsActivated) {
+        isFindBugsDeactivated = !findBugsActivated;
     }
 
     /**
@@ -140,18 +119,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isPmdActivated()
      */
-    public boolean isIsPmdActivated() {
-        return isPmdActivated();
-    }
-
     @DataBoundSetter
-    public void setIsPmdActivated(final boolean isPmdActivated) {
-        isPmdDeactivated = !isPmdActivated;
+    public void setPmdActivated(final boolean pmdActivated) {
+        isPmdDeactivated = !pmdActivated;
     }
 
     /**
@@ -164,18 +136,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isOpenTasksActivated()
      */
-    public boolean isIsOpenTasksActivated() {
-        return isOpenTasksActivated();
-    }
-
     @DataBoundSetter
-    public void setIsOpenTasksActivated(final boolean isOpenTasksActivated) {
-        isOpenTasksDeactivated = !isOpenTasksActivated;
+    public void setOpenTasksActivated(final boolean openTasksActivated) {
+        isOpenTasksDeactivated = !openTasksActivated;
     }
 
     /**
@@ -188,18 +153,11 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
-     * Needed by workflow snippet generator.
-     * Having this ugly getter naming to keep backward configuration file compatibility on fields names.
-     * 
      * @see #isWarningsActivated()
      */
-    public boolean isIsWarningsActivated() {
-        return isWarningsActivated();
-    }
-
     @DataBoundSetter
-    public void setIsWarningsActivated(final boolean isWarningsActivated) {
-        isWarningsDeactivated = !isWarningsActivated;
+    public void setWarningsActivated(final boolean warningsActivated) {
+        isWarningsDeactivated = !warningsActivated;
     }
 
     /**
