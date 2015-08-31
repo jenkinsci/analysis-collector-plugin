@@ -1,15 +1,16 @@
 package hudson.plugins.analysis.collector;
 
-import static org.junit.Assert.*;
-import hudson.plugins.analysis.graph.EmptyGraph;
-import hudson.plugins.analysis.graph.GraphConfiguration;
-import hudson.plugins.analysis.graph.PriorityGraph;
-import net.sf.json.JSONObject;
-
 import org.junit.Test;
 import org.mortbay.util.ajax.JSON;
 
 import com.google.common.collect.Sets;
+
+import net.sf.json.JSONObject;
+import static org.junit.Assert.*;
+
+import hudson.plugins.analysis.graph.EmptyGraph;
+import hudson.plugins.analysis.graph.GraphConfiguration;
+import hudson.plugins.analysis.graph.PriorityGraph;
 
 /**
  * Tests the class {@link AnalysisGraphConfiguration}.
@@ -63,7 +64,6 @@ public class AnalysisGraphConfigurationTest {
     public void testValidConfiguations() {
         AnalysisGraphConfiguration configuration = createConfigurationUnderTest();
 
-        // See GraphConfiguration.initializeFrom
         assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom("50!50!12!13!ORIGIN!1!!!0"));
         assertFalse(WRONG_VALUE_OF_DEACTIVATE_PROPERTY, configuration.canDeacticateOtherTrendGraphs());
 
