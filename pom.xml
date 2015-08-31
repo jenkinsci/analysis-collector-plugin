@@ -5,6 +5,7 @@
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
     <version>1.63</version>
+    <relativePath>../analysis-pom</relativePath>
   </parent>
 
   <artifactId>analysis-collector</artifactId>
