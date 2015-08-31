@@ -24,27 +24,27 @@ public class WarningsCountColumn extends ListViewColumn {
     /**
      * Creates a new instance of {@link WarningsCountColumn}.
      *
-     * @param isCheckStyleActivated
+     * @param checkStyleActivated
      *            determines whether to show the warnings from Checkstyle
-     * @param isDryActivated
+     * @param dryActivated
      *            determines whether to show the warnings from DRY
-     * @param isFindBugsActivated
+     * @param findBugsActivated
      *            determines whether to show the warnings from FindBugs
-     * @param isPmdActivated
+     * @param pmdActivated
      *            determines whether to show the warnings from PMD
-     * @param isOpenTasksActivated
+     * @param openTasksActivated
      *            determines whether to show open tasks
-     * @param isWarningsActivated
+     * @param warningsActivated
      *            determines whether to show compiler warnings
       */
     @DataBoundConstructor
-    public WarningsCountColumn(final boolean isCheckStyleActivated,
-            final boolean isDryActivated, final boolean isFindBugsActivated, final boolean isPmdActivated,
-            final boolean isOpenTasksActivated, final boolean isWarningsActivated) {
+    public WarningsCountColumn(final boolean checkStyleActivated,
+            final boolean dryActivated, final boolean findBugsActivated, final boolean pmdActivated,
+            final boolean openTasksActivated, final boolean warningsActivated) {
         super();
 
-        warningsAggregator = new WarningsAggregator(isCheckStyleActivated, isDryActivated,
-                isFindBugsActivated, isPmdActivated, isOpenTasksActivated, isWarningsActivated);
+        warningsAggregator = new WarningsAggregator(checkStyleActivated, dryActivated,
+                findBugsActivated, pmdActivated, openTasksActivated, warningsActivated);
     }
 
     /**

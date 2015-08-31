@@ -37,33 +37,33 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
      *            height of the graph
      * @param dayCountString
      *            number of days to consider
-     * @param isCheckStyleActivated
+     * @param checkStyleActivated
      *            determines whether to show the warnings from Checkstyle
-     * @param isDryActivated
+     * @param dryActivated
      *            determines whether to show the warnings from DRY
-     * @param isFindBugsActivated
+     * @param findBugsActivated
      *            determines whether to show the warnings from FindBugs
-     * @param isPmdActivated
+     * @param pmdActivated
      *            determines whether to show the warnings from PMD
-     * @param isOpenTasksActivated
+     * @param openTasksActivated
      *            determines whether to show open tasks
-     * @param isWarningsActivated
+     * @param warningsActivated
      *            determines whether to show compiler warnings
      */
     // CHECKSTYLE:OFF
     @DataBoundConstructor @SuppressWarnings("PMD.ExcessiveParameterList")
     public WarningsOriginGraphPortlet(final String name, final String width, final String height, final String dayCountString,
-            final boolean isCheckStyleActivated, final boolean isDryActivated,
-            final boolean isFindBugsActivated, final boolean isPmdActivated,
-            final boolean isOpenTasksActivated, final boolean isWarningsActivated) {
+            final boolean checkStyleActivated, final boolean dryActivated,
+            final boolean findBugsActivated, final boolean pmdActivated,
+            final boolean openTasksActivated, final boolean warningsActivated) {
         super(name, width, height, dayCountString);
 
-        isDryDeactivated = !isDryActivated;
-        isFindBugsDeactivated = !isFindBugsActivated;
-        isPmdDeactivated = !isPmdActivated;
-        isOpenTasksDeactivated = !isOpenTasksActivated;
-        isWarningsDeactivated = !isWarningsActivated;
-        isCheckStyleDeactivated = !isCheckStyleActivated;
+        isDryDeactivated = !dryActivated;
+        isFindBugsDeactivated = !findBugsActivated;
+        isPmdDeactivated = !pmdActivated;
+        isOpenTasksDeactivated = !openTasksActivated;
+        isWarningsDeactivated = !warningsActivated;
+        isCheckStyleDeactivated = !checkStyleActivated;
 
         configureGraph(getGraphType());
     }
