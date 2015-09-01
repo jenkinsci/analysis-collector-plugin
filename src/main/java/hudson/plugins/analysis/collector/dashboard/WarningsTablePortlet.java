@@ -75,6 +75,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      *
      * @return this
      */
+    @SuppressWarnings("deprecation")
     protected Object readResolve() {
         if (warningsAggregator == null) {
             warningsAggregator = new WarningsAggregator(!isCheckStyleDeactivated, !isDryDeactivated,

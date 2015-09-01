@@ -2,10 +2,14 @@ package hudson.plugins.analysis.collector;
 
 import org.apache.commons.lang.StringUtils;
 
-import edu.umd.cs.findbugs.annotations.SuppressWarnings;
-
 import hudson.model.Job;
-import hudson.plugins.analysis.collector.handler.*;
+import hudson.plugins.analysis.collector.handler.AnalysisHandler;
+import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
+import hudson.plugins.analysis.collector.handler.DryHandler;
+import hudson.plugins.analysis.collector.handler.FindBugsHandler;
+import hudson.plugins.analysis.collector.handler.PmdHandler;
+import hudson.plugins.analysis.collector.handler.TasksHandler;
+import hudson.plugins.analysis.collector.handler.WarningsHandler;
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.core.BuildResult;
 
