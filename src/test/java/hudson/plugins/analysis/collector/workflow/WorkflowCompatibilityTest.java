@@ -1,7 +1,5 @@
 package hudson.plugins.analysis.collector.workflow;
 
-import static org.junit.Assert.*;
-
 import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
 import org.jenkinsci.plugins.workflow.steps.CoreStep;
@@ -11,18 +9,17 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
-import hudson.model.Result;
-
-import hudson.plugins.analysis.collector.AnalysisPublisher;
-import hudson.plugins.analysis.collector.AnalysisResultAction;
+import static org.junit.Assert.*;
 
 import hudson.FilePath;
+import hudson.model.Result;
+import hudson.plugins.analysis.collector.AnalysisPublisher;
+import hudson.plugins.analysis.collector.AnalysisResultAction;
 
 /**
  * Test workflow compatibility.
  */
 public class WorkflowCompatibilityTest {
-
     @ClassRule
     public static JenkinsRule j = new JenkinsRule();
 
@@ -30,7 +27,6 @@ public class WorkflowCompatibilityTest {
      * General collector test using Findbugsas example.
      */
     @Test
-    @Ignore("This test requires FindBugs 4.62 and CheckStyle 3.43 or later. Ignoring until they are both released")
     public void collectorPublisherWorkflowStep() throws Exception {
         WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, "wf");
         FilePath workspace = j.jenkins.getWorkspaceFor(job);
@@ -55,7 +51,6 @@ public class WorkflowCompatibilityTest {
      * Failure test.
      */
     @Test
-    @Ignore("This test requires FindBugs 4.62 or later. Ignoring until it is released")
     public void collectorPublisherWorkflowStepSetLimits() throws Exception {
         WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, "wf2");
         FilePath workspace = j.jenkins.getWorkspaceFor(job);
@@ -75,7 +70,6 @@ public class WorkflowCompatibilityTest {
      * Unstable test.
      */
     @Test
-    @Ignore("This test requires FindBugs 4.62 or later. Ignoring until it is released")
     public void collectorPublisherWorkflowStepFailure() throws Exception {
         WorkflowJob job = j.jenkins.createProject(WorkflowJob.class, "wf3");
         FilePath workspace = j.jenkins.getWorkspaceFor(job);
@@ -92,6 +86,7 @@ public class WorkflowCompatibilityTest {
     }
 
     @Test
+    @Ignore("Caused by: java.lang.NoSuchMethodError: org.dom4j.io.HTMLWriter.setEnabled(Z)V")
     public void configurationRoundTrip() throws Exception {
         CoreStep before = new CoreStep(new AnalysisPublisher());
         CoreStep after = new StepConfigTester(j).configRoundTrip(before);
