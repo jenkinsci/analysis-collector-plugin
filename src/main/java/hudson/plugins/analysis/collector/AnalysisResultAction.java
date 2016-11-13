@@ -1,5 +1,8 @@
 package hudson.plugins.analysis.collector;
 
+import java.util.Collection;
+
+import hudson.model.Action;
 import hudson.model.Run;
 
 import hudson.plugins.analysis.core.AbstractResultAction;
@@ -40,5 +43,10 @@ public class AnalysisResultAction extends AbstractResultAction<AnalysisResult> {
     @Override
     protected PluginDescriptor getDescriptor() {
         return new AnalysisDescriptor();
+    }
+
+    @Override
+    public Collection<? extends Action> getProjectActions() {
+        return asSet(new AnalysisProjectAction(getJob()));
     }
 }

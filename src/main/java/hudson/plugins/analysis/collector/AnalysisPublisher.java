@@ -8,11 +8,12 @@ import java.util.List;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 
-import hudson.model.AbstractProject;
-import hudson.model.Action;
+import hudson.FilePath;
+import hudson.Launcher;
+import hudson.matrix.MatrixAggregator;
+import hudson.matrix.MatrixBuild;
 import hudson.model.BuildListener;
 import hudson.model.Run;
-
 import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
 import hudson.plugins.analysis.collector.handler.DryHandler;
 import hudson.plugins.analysis.collector.handler.FindBugsHandler;
@@ -25,11 +26,6 @@ import hudson.plugins.analysis.core.ParserResult;
 import hudson.plugins.analysis.core.ResultAction;
 import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.analysis.util.model.FileAnnotation;
-
-import hudson.FilePath;
-import hudson.Launcher;
-import hudson.matrix.MatrixAggregator;
-import hudson.matrix.MatrixBuild;
 
 /**
  * Collects the results of the various analysis plug-ins.
@@ -191,11 +187,6 @@ public class AnalysisPublisher extends HealthAwarePublisher {
         }
 
         return pluginResults;
-    }
-
-    @Override
-    public Action getProjectAction(final AbstractProject<?, ?> project) {
-        return new AnalysisProjectAction(project);
     }
 
     @Override

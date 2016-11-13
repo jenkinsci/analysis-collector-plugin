@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.kohsuke.stapler.StaplerRequest;
 
-import hudson.model.AbstractProject;
+import hudson.model.Job;
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.graph.BuildResultGraph;
 import hudson.plugins.analysis.graph.GraphConfigurationView;
@@ -21,23 +21,23 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
     /**
      * Instantiates a new {@link AnalysisProjectAction}.
      *
-     * @param project
-     *            the project that owns this action
+     * @param job
+     *            the job that owns this action
      */
-    public AnalysisProjectAction(final AbstractProject<?, ?> project) {
-        this(project, AnalysisResultAction.class);
+    public AnalysisProjectAction(final Job<?, ?> job) {
+        this(job, AnalysisResultAction.class);
     }
 
     /**
      * Instantiates a new {@link AnalysisProjectAction}.
      *
-     * @param project
-     *            the project that owns this action
+     * @param job
+     *            the job that owns this action
      * @param type
      *            the result action type
      */
-    public AnalysisProjectAction(final AbstractProject<?, ?> project, final Class<? extends AnalysisResultAction> type) {
-        super(project, type, Messages._Analysis_ProjectAction_Name(), Messages._Analysis_Trend_Name(),
+    public AnalysisProjectAction(final Job<?, ?> job, final Class<? extends AnalysisResultAction> type) {
+        super(job, type, Messages._Analysis_ProjectAction_Name(), Messages._Analysis_Trend_Name(),
                 AnalysisDescriptor.PLUGIN_ID, AnalysisDescriptor.ICON_URL, AnalysisDescriptor.RESULT_URL);
 
         createAggregator();
