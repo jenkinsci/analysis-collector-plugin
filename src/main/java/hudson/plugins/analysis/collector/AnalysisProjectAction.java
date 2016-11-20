@@ -67,13 +67,13 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
 
     @Override
     protected GraphConfigurationView createDefaultConfiguration() {
-        return new AnalysisDefaultGraphConfigurationView(createConfiguration(), getProject(), getUrlName(),
+        return new AnalysisDefaultGraphConfigurationView(createConfiguration(), getOwner(), getUrlName(),
                 createBuildHistory());
     }
 
     @Override
     protected GraphConfigurationView createUserConfiguration(final StaplerRequest request) {
-        return new AnalysisUserGraphConfigurationView(createConfiguration(), getProject(), getUrlName(),
+        return new AnalysisUserGraphConfigurationView(createConfiguration(), getOwner(), getUrlName(),
                 request.getCookies(), createBuildHistory());
     }
 

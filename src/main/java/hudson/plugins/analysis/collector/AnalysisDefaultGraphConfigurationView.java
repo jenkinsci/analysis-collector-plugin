@@ -1,15 +1,15 @@
 package hudson.plugins.analysis.collector;
 
-import hudson.model.AbstractProject;
-import hudson.plugins.analysis.core.BuildHistory;
-import hudson.plugins.analysis.graph.DefaultGraphConfigurationView;
-import hudson.plugins.analysis.graph.GraphConfiguration;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
+import hudson.model.Job;
+import hudson.plugins.analysis.core.BuildHistory;
+import hudson.plugins.analysis.graph.DefaultGraphConfigurationView;
+import hudson.plugins.analysis.graph.GraphConfiguration;
 
 /**
  * Adds some more parameters to the configuration view.
@@ -25,16 +25,16 @@ public class AnalysisDefaultGraphConfigurationView extends DefaultGraphConfigura
      *
      * @param configuration
      *            the graph configuration
-     * @param project
-     *            the owning project to configure the graphs for
+     * @param job
+     *            the owning job to configure the graphs for
      * @param pluginName
      *            The name of the plug-in.
      * @param buildHistory
-     *            the build history for this project
+     *            the build history for this job
      */
-    public AnalysisDefaultGraphConfigurationView(final AnalysisGraphConfiguration configuration, final AbstractProject<?, ?> project,
+    public AnalysisDefaultGraphConfigurationView(final AnalysisGraphConfiguration configuration, final Job<?, ?> job,
             final String pluginName, final BuildHistory buildHistory) {
-        super(configuration, project, pluginName, buildHistory);
+        super(configuration, job, pluginName, buildHistory);
 
         analysisConfiguration = configuration;
     }

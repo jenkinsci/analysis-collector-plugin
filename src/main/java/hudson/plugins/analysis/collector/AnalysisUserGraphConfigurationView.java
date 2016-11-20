@@ -1,14 +1,14 @@
 package hudson.plugins.analysis.collector;
 
-import hudson.model.AbstractProject;
-import hudson.plugins.analysis.core.BuildHistory;
-import hudson.plugins.analysis.graph.GraphConfiguration;
-import hudson.plugins.analysis.graph.UserGraphConfigurationView;
-
 import javax.servlet.http.Cookie;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
+import hudson.model.Job;
+import hudson.plugins.analysis.core.BuildHistory;
+import hudson.plugins.analysis.graph.GraphConfiguration;
+import hudson.plugins.analysis.graph.UserGraphConfigurationView;
 
 /**
  * Adds some more parameters to the configuration view.
@@ -24,19 +24,19 @@ public class AnalysisUserGraphConfigurationView extends UserGraphConfigurationVi
      *
      * @param configuration
      *            the graph configuration
-     * @param project
-     *            the owning project to configure the graphs for
+     * @param job
+     *            the owning job to configure the graphs for
      * @param pluginName
      *            The name of the plug-in. Also used as the suffix of the cookie
      *            name that is used to persist the configuration per user.
      * @param cookies
      *            the cookies containing the graph configuration
      * @param buildHistory
-     *            the build history for this project
+     *            the build history for this job
      */
-    public AnalysisUserGraphConfigurationView(final AnalysisGraphConfiguration configuration, final AbstractProject<?, ?> project,
+    public AnalysisUserGraphConfigurationView(final AnalysisGraphConfiguration configuration, final Job<?, ?> job,
             final String pluginName, final Cookie[] cookies, final BuildHistory buildHistory) {
-        super(configuration, project, pluginName, cookies, buildHistory);
+        super(configuration, job, pluginName, cookies, buildHistory);
 
         analysisConfiguration = configuration;
     }
