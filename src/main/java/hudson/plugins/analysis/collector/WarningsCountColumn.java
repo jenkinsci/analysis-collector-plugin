@@ -7,10 +7,15 @@ import jenkins.model.Jenkins;
 
 import hudson.Extension;
 import hudson.model.Job;
-import hudson.plugins.analysis.collector.handler.*;
+import hudson.plugins.analysis.collector.handler.AnalysisHandler;
+import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
+import hudson.plugins.analysis.collector.handler.DryHandler;
+import hudson.plugins.analysis.collector.handler.FindBugsHandler;
+import hudson.plugins.analysis.collector.handler.PmdHandler;
+import hudson.plugins.analysis.collector.handler.TasksHandler;
+import hudson.plugins.analysis.collector.handler.WarningsHandler;
 import hudson.plugins.analysis.core.PluginDescriptor;
 import hudson.plugins.analysis.util.HtmlPrinter;
-import hudson.views.ListViewColumn;
 import hudson.views.ListViewColumnDescriptor;
 
 /**
@@ -18,7 +23,7 @@ import hudson.views.ListViewColumnDescriptor;
  *
  * @author Ulli Hafner
  */
-public class WarningsCountColumn extends ListViewColumn {
+public class WarningsCountColumn extends hudson.plugins.analysis.views.WarningsCountColumn<AnalysisProjectAction> {
     private final WarningsAggregator warningsAggregator;
 
     /**
@@ -110,6 +115,11 @@ public class WarningsCountColumn extends ListViewColumn {
      */
     public String getNumberOfAnnotations(final Job<?, ?> project) {
         return warningsAggregator.getTotal(project);
+    }
+
+    @Override
+    protected Class<AnalysisProjectAction> getProjectAction() {
+        return AnalysisProjectAction.class;
     }
 
     /**
