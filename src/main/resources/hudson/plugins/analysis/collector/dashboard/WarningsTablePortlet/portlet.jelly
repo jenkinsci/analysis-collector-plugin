@@ -93,7 +93,13 @@
                 </j:if>
                 <j:if test="${it.isTotalsVisible()}">
                   <td class="pane">
-                      ${it.getTotal(job)}
+                    <j:set var="total" value="${it.getTotal(job)}" />
+                    <j:if test="${total == 0}">
+                      ${total}
+                    </j:if>
+                    <j:if test="${total > 0}">
+                      <a href="${rootURL}/${it.getUrl(job)}">${total}</a>
+                    </j:if>
                   </td>
                 </j:if>
               </tr>

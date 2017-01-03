@@ -370,6 +370,17 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
 
     }
 
+    /**
+     * Returns the URL of the referenced project action for the selected job.
+     *
+     * @param project
+     *            the selected project
+     * @return the URL of the project action
+     */
+    public String getUrl(final Job<?, ?> project) {
+        return project.getUrl() + new AnalysisProjectAction(project).getUrlName();
+    }
+
     /** Backward compatibility. @deprecated replaced by {@link WarningsAggregator} */
     @Deprecated
     private transient boolean isCheckStyleDeactivated;
