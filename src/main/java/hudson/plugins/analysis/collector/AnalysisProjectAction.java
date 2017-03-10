@@ -95,7 +95,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if CheckStyle results should be shown, <code>false</code> otherwise
      */
     public boolean isCheckStyleActivated() {
-        return warningsAggregator.hasCheckStyle(getProject());
+        return warningsAggregator.hasCheckStyle(getOwner());
     }
 
     /**
@@ -104,7 +104,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if DRY results should be shown, <code>false</code> otherwise
      */
     public boolean isDryActivated() {
-        return warningsAggregator.hasDry(getProject());
+        return warningsAggregator.hasDry(getOwner());
     }
 
     /**
@@ -113,7 +113,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if FindBugs results should be shown, <code>false</code> otherwise
      */
     public boolean isFindBugsActivated() {
-        return warningsAggregator.hasFindBugs(getProject());
+        return warningsAggregator.hasFindBugs(getOwner());
     }
 
     /**
@@ -122,7 +122,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if PMD results should be shown, <code>false</code> otherwise
      */
     public boolean isPmdActivated() {
-        return warningsAggregator.hasPmd(getProject());
+        return warningsAggregator.hasPmd(getOwner());
     }
 
     /**
@@ -131,7 +131,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if open tasks should be shown, <code>false</code> otherwise
      */
     public boolean isOpenTasksActivated() {
-        return warningsAggregator.hasPmd(getProject());
+        return warningsAggregator.hasPmd(getOwner());
     }
 
     /**
@@ -140,7 +140,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if compiler warnings results should be shown, <code>false</code> otherwise
      */
     public boolean isWarningsActivated() {
-        return warningsAggregator.hasCompilerWarnings(getProject());
+        return warningsAggregator.hasCompilerWarnings(getOwner());
     }
 
     /**
@@ -149,7 +149,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of Checkstyle warnings
      */
     public String getCheckStyle() {
-        return warningsAggregator.getCheckStyle(getProject());
+        return warningsAggregator.getCheckStyle(getOwner());
     }
 
     /**
@@ -158,7 +158,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of duplicate code warnings
      */
     public String getDry() {
-        return warningsAggregator.getDry(getProject());
+        return warningsAggregator.getDry(getOwner());
     }
 
     /**
@@ -167,7 +167,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of FindBugs warnings
      */
     public String getFindBugs() {
-        return warningsAggregator.getFindBugs(getProject());
+        return warningsAggregator.getFindBugs(getOwner());
     }
 
     /**
@@ -176,7 +176,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of PMD warnings
      */
     public String getPmd() {
-        return warningsAggregator.getPmd(getProject());
+        return warningsAggregator.getPmd(getOwner());
     }
 
     /**
@@ -185,7 +185,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of open tasks
      */
     public String getTasks() {
-        return warningsAggregator.getTasks(getProject());
+        return warningsAggregator.getTasks(getOwner());
     }
 
     /**
@@ -194,6 +194,6 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return the number of compiler warnings
      */
     public String getCompilerWarnings() {
-        return warningsAggregator.getCompilerWarnings(getProject());
+        return warningsAggregator.getCompilerWarnings(getOwner());
     }
 }
