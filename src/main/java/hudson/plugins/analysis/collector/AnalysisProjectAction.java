@@ -131,7 +131,7 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      * @return <code>true</code> if open tasks should be shown, <code>false</code> otherwise
      */
     public boolean isOpenTasksActivated() {
-        return warningsAggregator.hasPmd(getOwner());
+        return warningsAggregator.hasTasks(getOwner());
     }
 
     /**
