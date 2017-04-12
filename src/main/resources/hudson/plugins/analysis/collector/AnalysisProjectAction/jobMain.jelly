@@ -40,6 +40,11 @@
           <st:nbsp/> ${%Compiler Warnings}: <j:out value="${it.getCompilerWarnings()} "/>
         </li>
       </j:if>
+      <j:if test="${it.isAndroidLintActivated()}">
+        <li>
+          <img width="24" height="24" src="${resURL}/plugin/android-lint/icons/android-24x24.png" alt="${%Android Lint}" title="${%Android Lint}" />
+          <st:nbsp/> ${%Android Lint Warnings}: <j:out value="${it.getAndroidLint()} "/>
+        </li>
+      </j:if>
     </ul>
-
 </j:jelly>

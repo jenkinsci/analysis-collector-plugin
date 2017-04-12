@@ -14,6 +14,7 @@ import hudson.matrix.MatrixAggregator;
 import hudson.matrix.MatrixBuild;
 import hudson.model.BuildListener;
 import hudson.model.Run;
+import hudson.plugins.analysis.collector.handler.AndroidLintHandler;
 import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
 import hudson.plugins.analysis.collector.handler.DryHandler;
 import hudson.plugins.analysis.collector.handler.FindBugsHandler;
@@ -42,6 +43,7 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     private boolean isPmdDeactivated;
     private boolean isOpenTasksDeactivated;
     private boolean isWarningsDeactivated;
+    private boolean isAndroidLintDeactivated;
 
     private static final String PLUGIN_ID = "ANALYSIS-COLLECTOR";
 
@@ -157,6 +159,23 @@ public class AnalysisPublisher extends HealthAwarePublisher {
     }
 
     /**
+     * Returns whether Android lint results should be collected.
+     *
+     * @return <code>true</code> if Android lint results should be collected, <code>false</code> otherwise
+     */
+    public boolean isAndroidLintActivated() {
+        return !isAndroidLintDeactivated;
+    }
+
+    /**
+     * @see #isAndroidLintActivated()
+     */
+    @DataBoundSetter
+    public void setAndroidLintActivated(final boolean lintActivated) {
+        isAndroidLintDeactivated = !lintActivated;
+    }
+
+    /**
      * Initializes the plug-ins that should participate in the results of this
      * analysis collector.
      *
@@ -184,6 +203,9 @@ public class AnalysisPublisher extends HealthAwarePublisher {
         }
         if (AnalysisDescriptor.isWarningsInstalled() && isWarningsActivated()) {
             pluginResults.addAll(new WarningsHandler().getResultActions());
+        }
+        if (AnalysisDescriptor.isAndroidLintInstalled() && isAndroidLintActivated()) {
+            pluginResults.addAll(new AndroidLintHandler().getResultActions());
         }
 
         return pluginResults;

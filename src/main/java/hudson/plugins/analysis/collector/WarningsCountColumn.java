@@ -8,6 +8,7 @@ import jenkins.model.Jenkins;
 import hudson.Extension;
 import hudson.model.Job;
 import hudson.plugins.analysis.collector.handler.AnalysisHandler;
+import hudson.plugins.analysis.collector.handler.AndroidLintHandler;
 import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
 import hudson.plugins.analysis.collector.handler.DryHandler;
 import hudson.plugins.analysis.collector.handler.FindBugsHandler;
@@ -45,11 +46,11 @@ public class WarningsCountColumn extends hudson.plugins.analysis.views.WarningsC
     @DataBoundConstructor
     public WarningsCountColumn(final boolean checkStyleActivated,
             final boolean dryActivated, final boolean findBugsActivated, final boolean pmdActivated,
-            final boolean openTasksActivated, final boolean warningsActivated) {
+            final boolean openTasksActivated, final boolean warningsActivated, final boolean androidLintActivated) {
         super();
 
         warningsAggregator = new WarningsAggregator(checkStyleActivated, dryActivated,
-                findBugsActivated, pmdActivated, openTasksActivated, warningsActivated);
+                findBugsActivated, pmdActivated, openTasksActivated, warningsActivated, androidLintActivated);
     }
 
     /**
@@ -107,6 +108,15 @@ public class WarningsCountColumn extends hudson.plugins.analysis.views.WarningsC
     }
 
     /**
+     * Returns whether Android Lint results should be shown.
+     *
+     * @return <code>true</code> if Android lint results should be shown, <code>false</code> otherwise
+     */
+    public boolean isAndroidLintActivated() {
+        return warningsAggregator.isAndroidLintActivated();
+    }
+
+    /**
      * Returns the total number of annotations for the selected job.
      *
      * @param project
@@ -149,6 +159,9 @@ public class WarningsCountColumn extends hudson.plugins.analysis.views.WarningsC
         }
         if (isWarningsActivated()) {
             printLine(printer, new WarningsHandler(), warningsAggregator.getCompilerWarnings(job));
+        }
+        if (isAndroidLintActivated()) {
+            printLine(printer, new AndroidLintHandler(), warningsAggregator.getAndroidLint(job));
         }
         printer.append("</table>");
         return printer.toString();
@@ -234,6 +247,16 @@ public class WarningsCountColumn extends hudson.plugins.analysis.views.WarningsC
          */
         public boolean isWarningsInstalled() {
             return AnalysisDescriptor.isWarningsInstalled();
+        }
+
+        /**
+         * Returns whether the Android Lint plug-in is installed.
+         *
+         * @return <code>true</code> if the Android Lint plug-in is installed,
+         *         <code>false</code> if not.
+         */
+        public boolean isAndroidLintInstalled() {
+            return AnalysisDescriptor.isAndroidLintInstalled();
         }
 
         @Override

@@ -38,5 +38,9 @@
       <f:checkbox default="true"/>
     </f:entry>
   </j:if>
-
+  <j:if test="${descriptor.isAndroidLintInstalled()}">
+    <f:entry field="androidLintActivated" title="${%Android Lint warnings}">
+      <f:checkbox default="true"/>
+    </f:entry>
+  </j:if>
 </j:jelly>

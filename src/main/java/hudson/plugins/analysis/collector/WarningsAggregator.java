@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import hudson.model.Job;
 import hudson.plugins.analysis.collector.handler.AnalysisHandler;
+import hudson.plugins.analysis.collector.handler.AndroidLintHandler;
 import hudson.plugins.analysis.collector.handler.CheckStyleHandler;
 import hudson.plugins.analysis.collector.handler.DryHandler;
 import hudson.plugins.analysis.collector.handler.FindBugsHandler;
@@ -30,6 +31,7 @@ public class WarningsAggregator {
     private final boolean isPmdActivated;
     private final boolean isOpenTasksActivated;
     private final boolean isWarningsActivated;
+    private final boolean isAndroidLintActivated;
     private boolean hideJobPrefix;
 
     /**
@@ -50,13 +52,14 @@ public class WarningsAggregator {
      */
     public WarningsAggregator(final boolean isCheckStyleActivated,
             final boolean isDryActivated, final boolean isFindBugsActivated, final boolean isPmdActivated,
-            final boolean isOpenTasksActivated, final boolean isWarningsActivated) {
+            final boolean isOpenTasksActivated, final boolean isWarningsActivated, final boolean isAndroidLintActivated) {
         this.isCheckStyleActivated = isCheckStyleActivated;
         this.isDryActivated = isDryActivated;
         this.isFindBugsActivated = isFindBugsActivated;
         this.isPmdActivated = isPmdActivated;
         this.isOpenTasksActivated = isOpenTasksActivated;
         this.isWarningsActivated = isWarningsActivated;
+        this.isAndroidLintActivated = isAndroidLintActivated;
     }
 
     private int toInt(final String value) {
@@ -125,6 +128,10 @@ public class WarningsAggregator {
      */
     public boolean isWarningsActivated() {
         return isWarningsActivated;
+    }
+
+    public boolean isAndroidLintActivated() {
+        return isAndroidLintActivated;
     }
 
     /**
@@ -212,6 +219,20 @@ public class WarningsAggregator {
     }
 
     /**
+     * Returns the total number of Android lint warnings for the specified job.
+     *
+     * @param job
+     *            the job to get the warnings for
+     * @return the number of Android lint warnings
+     */
+    public String getAndroidLint(final Job<?, ?> job) {
+        if (isAndroidLintActivated()) {
+            return getWarnings(job, new AndroidLintHandler());
+        }
+        return NO_RESULTS_FOUND;
+    }
+
+    /**
      * Returns the number of warnings for the specified job.
      *
      * @param job
@@ -224,7 +245,8 @@ public class WarningsAggregator {
                 + toInt(getFindBugs(job))
                 + toInt(getPmd(job))
                 + toInt(getTasks(job))
-                + toInt(getCompilerWarnings(job)));
+                + toInt(getCompilerWarnings(job))
+                + toInt(getAndroidLint(job)));
     }
 
     /**
@@ -342,6 +364,20 @@ public class WarningsAggregator {
     public boolean hasCompilerWarnings(final Job<?, ?> job) {
         if (isWarningsActivated()) {
             return hasAction(job, new WarningsHandler());
+        }
+        return false;
+    }
+
+    /**
+     * Returns whether Android lint results are available for the specified job.
+     *
+     * @param job
+     *            the job to get the warnings for
+     * @return <code>true</code> if there are results, false otherwise
+     */
+    public boolean hasAndroidLint(final Job<?, ?> job) {
+        if (isAndroidLintActivated()) {
+            return hasAction(job, new AndroidLintHandler());
         }
         return false;
     }

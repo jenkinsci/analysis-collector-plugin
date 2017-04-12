@@ -25,6 +25,7 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
     private final boolean isPmdDeactivated;
     private final boolean isOpenTasksDeactivated;
     private final boolean isWarningsDeactivated;
+    private final boolean isAndroidLintDeactivated;
 
     /**
      * Creates a new instance of {@link WarningsOriginGraphPortlet}.
@@ -55,7 +56,7 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
     public WarningsOriginGraphPortlet(final String name, final String width, final String height, final String dayCountString,
             final boolean checkStyleActivated, final boolean dryActivated,
             final boolean findBugsActivated, final boolean pmdActivated,
-            final boolean openTasksActivated, final boolean warningsActivated) {
+            final boolean openTasksActivated, final boolean warningsActivated, final boolean androidLintActivated) {
         super(name, width, height, dayCountString);
 
         isDryDeactivated = !dryActivated;
@@ -64,6 +65,7 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
         isOpenTasksDeactivated = !openTasksActivated;
         isWarningsDeactivated = !warningsActivated;
         isCheckStyleDeactivated = !checkStyleActivated;
+        isAndroidLintDeactivated = !androidLintActivated;
 
         configureGraph(getGraphType());
     }
@@ -123,6 +125,15 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
         return !isWarningsDeactivated;
     }
 
+    /**
+     * Returns whether Android lint results should be collected.
+     *
+     * @return <code>true</code> if Android lint results should be collected, <code>false</code> otherwise
+     */
+    public boolean isAndroidLintActivated() {
+        return !isAndroidLintDeactivated;
+    }
+
     @Override
     protected Class<? extends AbstractProjectAction<?>> getAction() {
         return AnalysisProjectAction.class;
@@ -135,7 +146,7 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
 
     @Override
     protected BuildResultGraph getGraphType() {
-        return new OriginGraph(isCheckStyleActivated(), isDryActivated(), isFindBugsActivated(), isPmdActivated(), isOpenTasksActivated(), isWarningsActivated());
+        return new OriginGraph(isCheckStyleActivated(), isDryActivated(), isFindBugsActivated(), isPmdActivated(), isOpenTasksActivated(), isWarningsActivated(), isAndroidLintActivated());
     }
 
     /**
@@ -201,6 +212,16 @@ public final class WarningsOriginGraphPortlet extends AbstractWarningsGraphPortl
          */
         public boolean isWarningsInstalled() {
             return AnalysisDescriptor.isWarningsInstalled();
+        }
+
+        /**
+         * Returns whether the Android Lint plug-in is installed.
+         *
+         * @return <code>true</code> if the Android Lint plug-in is installed,
+         *         <code>false</code> if not.
+         */
+        public boolean isAndroidLintInstalled() {
+            return AnalysisDescriptor.isAndroidLintInstalled();
         }
 
         @Override
