@@ -30,6 +30,9 @@
               <j:if test="${it.isWarningsActivated()}">
                 <td width="10%" class="pane-header">${%Compiler Warnings}</td>
               </j:if>
+              <j:if test="${it.isAndroidLintActivated()}">
+                <td width="10%" class="pane-header">${%Android Lint}</td>
+              </j:if>
             </j:if>
             <j:if test="${it.useIcons()}">
               <j:if test="${it.isCheckStyleActivated()}">
@@ -49,6 +52,9 @@
               </j:if>
               <j:if test="${it.isWarningsActivated()}">
                 <td width="5%" class="pane-header"><img width="24" height="24" src="${resURL}/plugin/warnings/icons/warnings-24x24.png" alt="${%Compiler Warnings}" title="${%Compiler Warnings}" /></td>
+              </j:if>
+              <j:if test="${it.isAndroidLintActivated()}">
+                <td width="5%" class="pane-header"><img width="24" height="24" src="${resURL}/plugin/android-lint/icons/android-24x24.png" alt="${%Android Lint}" title="${%Android Lint}" /></td>
               </j:if>
             </j:if>
             <j:if test="${it.isTotalsVisible()}">
@@ -89,6 +95,11 @@
                 <j:if test="${it.isWarningsActivated()}">
                   <td class="pane">
                       <j:out value="${it.getCompilerWarnings(job)}" />
+                  </td>
+                </j:if>
+                <j:if test="${it.isAndroidLintActivated()}">
+                  <td class="pane">
+                      <j:out value="${it.getAndroidLint(job)}" />
                   </td>
                 </j:if>
                 <j:if test="${it.isTotalsVisible()}">
@@ -136,6 +147,11 @@
               <j:if test="${it.isWarningsActivated()}">
                 <td class="pane-header">
                     ${it.getWarnings(jobs)}
+                </td>
+              </j:if>
+              <j:if test="${it.isAndroidLintActivated()}">
+                <td class="pane-header">
+                    ${it.getAndroidLint(jobs)}
                 </td>
               </j:if>
               <j:if test="${it.isTotalsVisible()}">

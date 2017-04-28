@@ -60,14 +60,14 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
     public WarningsTablePortlet(final String name, final boolean useImages, final boolean checkStyleActivated,
             final boolean dryActivated, final boolean findBugsActivated, final boolean pmdActivated,
             final boolean openTasksActivated, final boolean warningsActivated,
-            final boolean canHideZeroWarningsProjects) {
+            final boolean androidLintActivated, final boolean canHideZeroWarningsProjects) {
         // CHECKSTYLE:ON
         super(name, canHideZeroWarningsProjects);
 
         this.useImages = useImages;
 
         warningsAggregator = new WarningsAggregator(checkStyleActivated, dryActivated, findBugsActivated,
-                pmdActivated, openTasksActivated, warningsActivated);
+                pmdActivated, openTasksActivated, warningsActivated, androidLintActivated);
     }
 
     /**
@@ -79,7 +79,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
     protected Object readResolve() {
         if (warningsAggregator == null) {
             warningsAggregator = new WarningsAggregator(!isCheckStyleDeactivated, !isDryDeactivated,
-                    !isFindBugsDeactivated, !isPmdDeactivated, !isOpenTasksDeactivated, !isWarningsDeactivated);
+                    !isFindBugsDeactivated, !isPmdDeactivated, !isOpenTasksDeactivated, !isWarningsDeactivated, !isAndroidLintDeactivated);
         }
         return this;
     }
@@ -120,7 +120,8 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
                 + toInt(isFindBugsActivated())
                 + toInt(isPmdActivated())
                 + toInt(isOpenTasksActivated())
-                + toInt(isWarningsActivated()) > 1;
+                + toInt(isWarningsActivated())
+                + toInt(isAndroidLintActivated()) > 1;
     }
 
     private int toInt(final boolean isActivated) {
@@ -179,6 +180,15 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      */
     public boolean isWarningsActivated() {
         return warningsAggregator.isWarningsActivated();
+    }
+
+    /**
+     * Returns whether Android lint results should be shown.
+     *
+     * @return <code>true</code> if Android lint results should be shown, <code>false</code> otherwise
+     */
+    public boolean isAndroidLintActivated() {
+        return warningsAggregator.isAndroidLintActivated();
     }
 
     @Override
@@ -261,6 +271,17 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      */
     public String getCompilerWarnings(final Job<?, ?> job) {
         return warningsAggregator.getCompilerWarnings(job);
+    }
+
+    /**
+     * Returns the total number of Android lint warnings for the specified job.
+     *
+     * @param job
+     *            the job to get the warnings for
+     * @return the number of Android lint warnings
+     */
+    public String getAndroidLint(final Job<?, ?> job) {
+        return warningsAggregator.getAndroidLint(job);
     }
 
     /**
@@ -355,6 +376,21 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
     }
 
     /**
+     * Returns the number of Android lint warnings for the specified jobs.
+     *
+     * @param jobs
+     *            the jobs to get the warnings for
+     * @return the number of Android lint warnings
+     */
+    public String getAndroidLint(final Collection<Job<?, ?>> jobs) {
+        int sum = 0;
+        for (Job<?, ?> job : jobs) {
+            sum += toInt(warningsAggregator.getAndroidLint(job));
+        }
+        return String.valueOf(sum);
+    }
+
+    /**
      * Returns the total number of warnings for all jobs.
      *
      * @param jobs
@@ -399,7 +435,8 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
     /** Backward compatibility. @deprecated replaced by {@link WarningsAggregator} */
     @Deprecated
     private transient boolean isWarningsDeactivated;
-
+    @Deprecated
+    private transient boolean isAndroidLintDeactivated;
      /**
      * Extension point registration.
      *
@@ -467,7 +504,17 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
             return AnalysisDescriptor.isWarningsInstalled();
         }
 
-        @Override
+         /**
+          * Returns whether the Android Lint plug-in is installed.
+          *
+          * @return <code>true</code> if the Android Lint plug-in is installed,
+          *         <code>false</code> if not.
+          */
+        public boolean isAndroidLintInstalled() {
+             return AnalysisDescriptor.isAndroidLintInstalled();
+        }
+
+         @Override
         public String getDisplayName() {
             return Messages.Portlet_WarningsTable();
         }

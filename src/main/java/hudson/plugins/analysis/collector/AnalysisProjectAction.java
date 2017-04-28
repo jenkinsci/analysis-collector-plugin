@@ -50,7 +50,8 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
                 AnalysisDescriptor.isFindBugsInstalled(),
                 AnalysisDescriptor.isPmdInstalled(),
                 AnalysisDescriptor.isOpenTasksInstalled(),
-                AnalysisDescriptor.isWarningsInstalled());
+                AnalysisDescriptor.isWarningsInstalled(),
+                AnalysisDescriptor.isAndroidLintInstalled());
         warningsAggregator.hideJobPrefix();
     }
 
@@ -144,6 +145,15 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
     }
 
     /**
+     * Returns whether Android lint results should be shown.
+     *
+     * @return <code>true</code> if Android lint results should be shown, <code>false</code> otherwise
+     */
+    public boolean isAndroidLintActivated() {
+        return warningsAggregator.hasAndroidLint(getOwner());
+    }
+
+    /**
      * Returns the number of Checkstyle warnings for this action.
      *
      * @return the number of Checkstyle warnings
@@ -195,5 +205,14 @@ public class AnalysisProjectAction extends AbstractProjectAction<AnalysisResultA
      */
     public String getCompilerWarnings() {
         return warningsAggregator.getCompilerWarnings(getOwner());
+    }
+
+    /**
+     * Returns the number of Android lint warnings for this action.
+     *
+     * @return the number of Android lint warnings
+     */
+    public String getAndroidLint() {
+        return warningsAggregator.getAndroidLint(getOwner());
     }
 }

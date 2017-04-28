@@ -31,6 +31,7 @@ public final class AnalysisDescriptor extends PluginDescriptor {
     public static final String PMD = "pmd";
     public static final String TASKS = "tasks";
     public static final String WARNINGS = "warnings";
+    public static final String ANDROID_LINT = "android-lint";
 
     /**
      * Returns the activated plug-ins.
@@ -57,6 +58,9 @@ public final class AnalysisDescriptor extends PluginDescriptor {
         }
         if (isWarningsInstalled()) {
             plugins.add(WARNINGS);
+        }
+        if (isAndroidLintInstalled()) {
+            plugins.add(ANDROID_LINT);
         }
         return plugins;
     }
@@ -119,6 +123,16 @@ public final class AnalysisDescriptor extends PluginDescriptor {
      */
     public static boolean isWarningsInstalled() {
         return isPluginInstalled(WARNINGS);
+    }
+
+    /**
+     * Returns whether the Android Lint plug-in is installed.
+     *
+     * @return <code>true</code> if the Android Lint plug-in is installed,
+     *         <code>false</code> if not.
+     */
+    public static boolean isAndroidLintInstalled() {
+        return isPluginInstalled(ANDROID_LINT);
     }
 
     /**

@@ -37,7 +37,8 @@ public class OriginGraph extends CategoryBuildResultGraph {
     public OriginGraph() {
         this(AnalysisDescriptor.isCheckStyleInstalled(), AnalysisDescriptor.isDryInstalled(),
                 AnalysisDescriptor.isFindBugsInstalled(), AnalysisDescriptor.isPmdInstalled(),
-                AnalysisDescriptor.isOpenTasksInstalled(), AnalysisDescriptor.isWarningsInstalled());
+                AnalysisDescriptor.isOpenTasksInstalled(), AnalysisDescriptor.isWarningsInstalled(),
+                AnalysisDescriptor.isAndroidLintInstalled());
     }
 
     /**
@@ -58,7 +59,8 @@ public class OriginGraph extends CategoryBuildResultGraph {
      */
     public OriginGraph(final boolean isCheckStyleActivated, final boolean isDryActivated,
             final boolean isFindBugsActivated, final boolean isPmdActivated,
-            final boolean isOpenTasksActivated, final boolean isWarningsActivated) {
+            final boolean isOpenTasksActivated, final boolean isWarningsActivated,
+            final boolean isAndroidLintActivated) {
         super();
 
         if (isCheckStyleActivated) {
@@ -84,6 +86,10 @@ public class OriginGraph extends CategoryBuildResultGraph {
         if (isWarningsActivated) {
             originsKeys.add(hudson.plugins.warnings.parser.Warning.ORIGIN);
             originLabels.add(Messages.Analysis_Warnings_Warning_Origin());
+        }
+        if (isAndroidLintActivated) {
+            originsKeys.add("android-lint");  // org.jenkinsci.plugins.android_lint.parser.LintAnnotation.ORIGIN is private
+            originLabels.add(Messages.Analysis_AndroidLint_Warning_Origin());
         }
     }
 
