@@ -65,6 +65,7 @@
     <orderEntry type="library" name="Maven: org.jvnet.hudson.plugins:tasks:4.46" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.hudson.plugins:warnings:4.49" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.hudson.plugins:android-lint:2.4" level="project" />
     <orderEntry type="library" name="Maven: org.jenkins-ci.plugins:matrix-project:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.jenkins-ci.main:maven-plugin:2.9" level="project" />
     <orderEntry type="library" name="Maven: org.jenkins-ci.plugins:javadoc:1.0" level="project" />

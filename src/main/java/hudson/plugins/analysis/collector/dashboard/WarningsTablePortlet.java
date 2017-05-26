@@ -2,6 +2,7 @@ package hudson.plugins.analysis.collector.dashboard;
 
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import hudson.Extension;
@@ -207,6 +208,11 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
         return warningsAggregator.getTotal(job);
     }
 
+    private String filterUrl(final String link) {
+        String prefix = getDashboard().getUrl();
+        return link.replaceFirst(prefix, StringUtils.EMPTY);
+    }
+
     /**
      * Returns the number of Checkstyle warnings for the specified job.
      *
@@ -215,7 +221,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of Checkstyle warnings
      */
     public String getCheckStyle(final Job<?, ?> job) {
-        return warningsAggregator.getCheckStyle(job);
+        return filterUrl(warningsAggregator.getCheckStyle(job));
     }
 
     /**
@@ -226,7 +232,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of duplicate code warnings
      */
     public String getDry(final Job<?, ?> job) {
-        return warningsAggregator.getDry(job);
+        return filterUrl(warningsAggregator.getDry(job));
     }
 
     /**
@@ -237,7 +243,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of FindBugs warnings
      */
     public String getFindBugs(final Job<?, ?> job) {
-        return warningsAggregator.getFindBugs(job);
+        return filterUrl(warningsAggregator.getFindBugs(job));
     }
 
     /**
@@ -248,7 +254,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of PMD warnings
      */
     public String getPmd(final Job<?, ?> job) {
-        return warningsAggregator.getPmd(job);
+        return filterUrl(warningsAggregator.getPmd(job));
     }
 
     /**
@@ -259,7 +265,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of open tasks
      */
     public String getTasks(final Job<?, ?> job) {
-        return warningsAggregator.getTasks(job);
+        return filterUrl(warningsAggregator.getTasks(job));
     }
 
     /**
@@ -270,7 +276,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of compiler warnings
      */
     public String getCompilerWarnings(final Job<?, ?> job) {
-        return warningsAggregator.getCompilerWarnings(job);
+        return filterUrl(warningsAggregator.getCompilerWarnings(job));
     }
 
     /**
@@ -281,7 +287,7 @@ public class WarningsTablePortlet extends AbstractWarningsTablePortlet {
      * @return the number of Android lint warnings
      */
     public String getAndroidLint(final Job<?, ?> job) {
-        return warningsAggregator.getAndroidLint(job);
+        return filterUrl(warningsAggregator.getAndroidLint(job));
     }
 
     /**

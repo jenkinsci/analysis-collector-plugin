@@ -281,7 +281,7 @@ public class WarningsAggregator {
     }
 
     private String getJobPrefix(final Job<?, ?> job) {
-        return hideJobPrefix ? StringUtils.EMPTY : job.getShortUrl();
+        return hideJobPrefix ? StringUtils.EMPTY : job.getUrl();
     }
 
     /**
