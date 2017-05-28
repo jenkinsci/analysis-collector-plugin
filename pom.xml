@@ -11,7 +11,7 @@
   <artifactId>analysis-collector</artifactId>
   <packaging>hpi</packaging>
   <name>Static Analysis Collector Plug-in</name>
-  <version>1.51</version>
+  <version>1.52-SNAPSHOT</version>
   <url>http://wiki.jenkins-ci.org/x/tgeIAg</url>
 
   <description>
@@ -80,7 +80,7 @@
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
-    <tag>analysis-collector-1.51</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <repositories>
