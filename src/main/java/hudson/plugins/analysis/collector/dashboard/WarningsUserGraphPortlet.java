@@ -6,11 +6,11 @@ import static hudson.plugins.analysis.collector.Messages.*;
 
 import hudson.Extension;
 import hudson.model.Descriptor;
+import hudson.plugins.analysis.collector.AnalysisProjectAction;
 import hudson.plugins.analysis.core.AbstractProjectAction;
 import hudson.plugins.analysis.dashboard.AbstractWarningsGraphPortlet;
 import hudson.plugins.analysis.graph.AnnotationsByUserGraph;
 import hudson.plugins.analysis.graph.BuildResultGraph;
-import hudson.plugins.tasks.TasksProjectAction;
 import hudson.plugins.view.dashboard.DashboardPortlet;
 
 /**
@@ -40,7 +40,7 @@ public final class WarningsUserGraphPortlet extends AbstractWarningsGraphPortlet
 
     @Override
     protected Class<? extends AbstractProjectAction<?>> getAction() {
-        return TasksProjectAction.class;
+        return AnalysisProjectAction.class;
     }
 
     @Override
