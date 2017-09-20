@@ -1,7 +1,6 @@
 package hudson.plugins.analysis.collector;
 
 import org.junit.Test;
-import org.mortbay.util.ajax.JSON;
 
 import com.google.common.collect.Sets;
 
@@ -80,16 +79,14 @@ public class AnalysisGraphConfigurationTest {
      */
     @Test
     public void testValidJSONConfiguations() {
-        Object enabled = JSON.parse("{\"\":\"\",\"buildCountString\":\"\",\"useBuildDateAsDomain\":true,\"canDeacticateOtherTrendGraphs\":true,\"dayCountString\":\"\",\"graphType\":\"ORIGIN\",\"height\":\"200\",\"width\":\"500\"}");
-        JSONObject jsonObject = JSONObject.fromObject(enabled);
+        JSONObject jsonObject = JSONObject.fromObject("{\"\":\"\",\"buildCountString\":\"\",\"useBuildDateAsDomain\":true,\"canDeacticateOtherTrendGraphs\":true,\"dayCountString\":\"\",\"graphType\":\"ORIGIN\",\"height\":\"200\",\"width\":\"500\"}");
 
         AnalysisGraphConfiguration configuration = createConfigurationUnderTest();
 
         assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom(jsonObject));
         assertTrue(WRONG_VALUE_OF_DEACTIVATE_PROPERTY, configuration.canDeacticateOtherTrendGraphs());
 
-        Object disabled = JSON.parse("{\"\":\"\",\"buildCountString\":\"\",\"useBuildDateAsDomain\":true,\"canDeacticateOtherTrendGraphs\":false,\"dayCountString\":\"\",\"graphType\":\"ORIGIN\",\"height\":\"200\",\"width\":\"500\"}");
-        jsonObject = JSONObject.fromObject(disabled);
+        jsonObject = JSONObject.fromObject("{\"\":\"\",\"buildCountString\":\"\",\"useBuildDateAsDomain\":true,\"canDeacticateOtherTrendGraphs\":false,\"dayCountString\":\"\",\"graphType\":\"ORIGIN\",\"height\":\"200\",\"width\":\"500\"}");
 
         assertTrue(VALID_CONFIGURATION_REJECTED, configuration.initializeFrom(jsonObject));
         assertFalse(WRONG_VALUE_OF_DEACTIVATE_PROPERTY, configuration.canDeacticateOtherTrendGraphs());

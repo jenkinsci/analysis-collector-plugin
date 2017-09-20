@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.65</version>
+    <version>1.68-SNAPSHOT</version>
     <relativePath>../analysis-pom</relativePath>
   </parent>
 
@@ -24,7 +24,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.88</version>
+      <version>1.93-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -75,6 +75,24 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <configuration>
+          <rules>
+            <requireUpperBoundDeps>
+              <excludes combine.children="append">
+                <exclude>jaxen:jaxen</exclude>
+              </excludes>
+            </requireUpperBoundDeps>
+          </rules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
