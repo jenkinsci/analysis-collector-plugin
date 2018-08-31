@@ -1,9 +1,8 @@
-  This Jenkins plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
-  the plug-in collects the different analysis results and shows the results in a combined trend graph.
-  Additionally, the plug-in provides health reporting and build stability based on these combined results.
+This plug-in is not supported anymore. It will be incorporated into "Jenkins Warnings Plug-in" and the 
+associated "Static Analysis Model and Parsers" library soon.
 
-  See: http://wiki.jenkins-ci.org/x/tgeIAg
+References:
+- https://github.com/jenkinsci/analysis-model
+- https://github.com/jenkinsci/warnings-plugin
 
-  All source code is licensed under the MIT license.
 
-  Maintainer: Dr. Ullrich Hafner
