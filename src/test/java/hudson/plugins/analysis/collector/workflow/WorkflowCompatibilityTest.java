@@ -2,10 +2,7 @@ package hudson.plugins.analysis.collector.workflow;
 
 import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
-import org.jenkinsci.plugins.workflow.steps.CoreStep;
-import org.jenkinsci.plugins.workflow.steps.StepConfigTester;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
@@ -13,7 +10,6 @@ import static org.junit.Assert.*;
 
 import hudson.FilePath;
 import hudson.model.Result;
-import hudson.plugins.analysis.collector.AnalysisPublisher;
 import hudson.plugins.analysis.collector.AnalysisResultAction;
 
 /**
@@ -76,42 +72,13 @@ public class WorkflowCompatibilityTest {
         FilePath report = workspace.child("target").child("findbugs.xml");
         report.copyFrom(WorkflowCompatibilityTest.class.getResourceAsStream("/findbugs-native.xml"));
         job.setDefinition(new CpsFlowDefinition(
-        "node {\n" +
-        "  step([$class: 'FindBugsPublisher'])\n" +
-        "  step([$class: 'AnalysisPublisher', unstableTotalAll: '0', usePreviousBuildAsReference: false])\n" +
-        "}"));
+                "node {\n" +
+                        "  step([$class: 'FindBugsPublisher'])\n" +
+                        "  step([$class: 'AnalysisPublisher', unstableTotalAll: '0', usePreviousBuildAsReference: false])\n" +
+                        "}"));
         j.assertBuildStatus(Result.UNSTABLE, job.scheduleBuild2(0).get());
         AnalysisResultAction result = job.getLastBuild().getAction(AnalysisResultAction.class);
         assertEquals(result.getResult().getAnnotations().size(), 2);
-    }
-
-    @Test
-    @Ignore("Caused by: java.lang.NoSuchMethodError: org.dom4j.io.HTMLWriter.setEnabled(Z)V")
-    public void configurationRoundTrip() throws Exception {
-        CoreStep before = new CoreStep(new AnalysisPublisher());
-        CoreStep after = new StepConfigTester(j).configRoundTrip(before);
-        AnalysisPublisher delegate = (AnalysisPublisher) after.delegate;
-        // Default values (all activated)
-        assertToolsStatus(delegate, true);
-
-        delegate.setCheckStyleActivated(false);
-        delegate.setFindBugsActivated(false);
-        delegate.setDryActivated(false);
-        delegate.setPmdActivated(false);
-        delegate.setOpenTasksActivated(false);
-        delegate.setWarningsActivated(false);
-        after = new StepConfigTester(j).configRoundTrip(after);
-        // Non default values (all deactivated)
-        assertToolsStatus((AnalysisPublisher) after.delegate, false);
-    }
-
-    private void assertToolsStatus(AnalysisPublisher step, boolean status) {
-        assertEquals(status, step.isCheckStyleActivated());
-        assertEquals(status, step.isFindBugsActivated());
-        assertEquals(status, step.isDryActivated());
-        assertEquals(status, step.isPmdActivated());
-        assertEquals(status, step.isOpenTasksActivated());
-        assertEquals(status, step.isWarningsActivated());
     }
 }
 
